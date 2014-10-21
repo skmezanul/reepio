@@ -50,43 +50,44 @@
 
                 this.id = this.parseId(id);
 
-                peeringService.getPeer().then(function(peer){
-
-                    this.connection = peer.connect(this.id.uploaderId, {
-                        reliable: true
-                    });
-
-                    this.connection.on('open', function(){
-                        if(this.file.name.length == 0){
-                            this.connection.send({
-                                packet: 'RequestFileInformation',
-                                fileId: this.id.fileId
+                peeringService
+                        .getPeer()
+                        .then(function(peer){
+                            this.connection = peer.connect(this.id.uploaderId, {
+                                reliable: true
                             });
-                        }
-                    }.bind(this));
 
-                    this.connection.on('close', function(){
-                        $rootScope.$emit('DownloadDataChannelClose');
-                    });
+                            this.connection.on('open', function(){
+                                if(this.file.name.length == 0){
+                                    this.connection.send({
+                                        packet: 'RequestFileInformation',
+                                        fileId: this.id.fileId
+                                    });
+                                }
+                            }.bind(this));
 
-                    this.connection.on('data', function(data){
-                        if(data instanceof ArrayBuffer){
-                            this.__onPacketFileData(data);
-                            return;
-                        }
+                            this.connection.on('close', function(){
+                                $rootScope.$emit('DownloadDataChannelClose');
+                            });
 
-                        var fn = this['__onPacket' + data.packet];
+                            this.connection.on('data', function(data){
+                                if(data instanceof ArrayBuffer){
+                                    this.__onPacketFileData(data);
+                                    return;
+                                }
 
-                        if(typeof fn === 'function') {
-                            fn = fn.bind(this);
-                            fn(data);
-                        }
-                    }.bind(this));
+                                var fn = this['__onPacket' + data.packet];
 
-                    this.connection.on('error', function(e){
-                        $rootScope.$emit('DownloadDataChannelClose');
-                    });
-                }.bind(this));
+                                if(typeof fn === 'function') {
+                                    fn = fn.bind(this);
+                                    fn(data);
+                                }
+                            }.bind(this));
+
+                            this.connection.on('error', function(e){
+                                $rootScope.$emit('DownloadDataChannelClose');
+                            });
+                        }.bind(this));
             }
 
             this.parseId = function(id){

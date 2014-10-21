@@ -76,7 +76,7 @@
 				controller: 'StaticCtrl'
 			});
 
-		$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode(app.constant('appEnv') !== 'dev');
   		$analyticsProvider.virtualPageviews(false);
   		
 	}]);

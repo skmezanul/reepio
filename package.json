@@ -6,7 +6,7 @@
         "peer": "~0.2.5"
     },
     "scripts": {
-        "start-peering-server": "node ./node_modules/reepio-peering-server/src/server.js --port=9001",
+        "start-peering-server": "node ./node_modules/reepio-peering-server/src/server.js --port=9000",
         "start": "http-server -a localhost -p 8000 -c-1",
         "test": "karma start karma.conf.js"
     },

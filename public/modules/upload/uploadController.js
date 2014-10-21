@@ -55,9 +55,11 @@
 
                     uploadService.registerFile(file.rawFile).then(function(id){
                         file.fileId = id.fileId;
-                        file.uniqueUrl = window.location.protocol + '//' + location.hostname + '/d/' + id.peerId + id.fileId;
+                        file.uniqueUrl = $location.absUrl() + '#/d/' + id.peerId + id.fileId;
 
                         $analytics.eventTrack('urlCreated', { category: 'upload', label: $crypto.crc32(id.peerId + id.fileId) });
+                    }, function (err) {
+                        console.error(err);
                     });
                 });
 

@@ -25,6 +25,8 @@
             this.peer = null;
 
             this.getPeer = function(){
+                var timeout;
+
                 var deferred  = $q.defer();
 
                 if(this.peer !== null){
@@ -35,12 +37,19 @@
                 var peer = new Peer(randomService.generateString(config.peerIdLength), config.peerConfig);
 
                 peer.on('open', function(id){
+                    clearInterval(timeout);
                     deferred.resolve(peer);
                 });
 
                 peer.on('error', function(e){
+                    clearInterval(timeout);
                     deferred.reject(e);
                 });
+
+                timeout = setTimeout(function () {
+                    console.log(peer);
+                    deferred.reject();
+                }, typeof config.peerConfig.timeout === 'undefined' ? 10000 : config.peerConfig.timeout);
 
                 this.peer = peer;
                 return deferred.promise;

@@ -61,9 +61,7 @@
              * @returns {Q.promise}
              */
             this.registerFile = function(file){
-                var deferred  = $q.defer();
-
-                peeringService.getPeer().then(function(peer){
+                return peeringService.getPeer().then(function(peer){
                     var fileId = this.__generateFileId();
 
                     this.uploads[fileId] = {};
@@ -88,14 +86,9 @@
                         }.bind(this));
                     }
 
-                    deferred.resolve({peerId: peer.id, fileId: fileId});
-                }.bind(this),
-                    function(){
-                        deferred.reject();
-                    });
-
-                return deferred.promise;
-            }
+                    return {peerId: peer.id, fileId: fileId};
+                }.bind(this));
+            };
 
             /**
              * Generates a radom file id

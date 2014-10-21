@@ -25,8 +25,7 @@
     angular.module('download')
         .controller('DownloadCtrl', ['$scope', '$rootScope', '$route', '$timeout', '$location', '$analytics', '$crypto', 'config', 'downloadService', 'detectCrawlerService',
             function ($scope, $rootScope, $route, $timeout, $location, $analytics, $crypto, config, downloadService, detectCrawlerService) {
-
-                if($rootScope.downloadId === undefined){
+                if(typeof $rootScope.downloadId === 'undefined'){
                     $rootScope.downloadId = $route.current.params.id;
                     $rootScope.cryptoDownloadId = $crypto.crc32($route.current.params.id);
                     $rootScope.downloadService = downloadService;
@@ -46,7 +45,7 @@
 //                $scope.isImage = false;
 
                 if(downloadService.id === null && $rootScope.downloadId.length == (config.peerIdLength + config.fileIdLength)){
-                        downloadService.requestFileInformation($rootScope.downloadId);
+                    downloadService.requestFileInformation($rootScope.downloadId);
                 }
 
                 $scope.downloadFile = function(){
