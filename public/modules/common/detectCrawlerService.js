@@ -30,6 +30,11 @@
              * @returns {boolean}
              */
             this.isCrawler = function(ua){
+                if(typeof ua != 'string')
+                    return false;
+
+                ua = ua.trim();
+
                 if( ! ua)
                     return false;
 

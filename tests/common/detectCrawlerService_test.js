@@ -10,6 +10,15 @@ describe('detectCrawlerService module tests', function () {
             expect(typeof detectCrawlerService.isCrawler).toBe('function');
         }));
 
+        it('should return false for invalid values', inject(function(detectCrawlerService){
+            expect(detectCrawlerService.isCrawler('')).toBe(false);
+            expect(detectCrawlerService.isCrawler(' ')).toBe(false);
+            expect(detectCrawlerService.isCrawler()).toBe(false);
+            expect(detectCrawlerService.isCrawler(null)).toBe(false);
+            expect(detectCrawlerService.isCrawler(true)).toBe(false);
+            expect(detectCrawlerService.isCrawler(false)).toBe(false);
+        }));
+
         it('should detect google agents as crawler', inject(function(detectCrawlerService){
             expect(detectCrawlerService.isCrawler('Googlebot')).toBe(true);
             expect(detectCrawlerService.isCrawler('Googlebot-News (Googlebot)')).toBe(true);
