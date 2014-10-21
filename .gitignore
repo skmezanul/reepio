@@ -4,3 +4,4 @@ dist
 .DS_Store
 ._*
 *.sublime-project
+npm_debug.log
