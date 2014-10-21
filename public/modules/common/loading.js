@@ -28,7 +28,6 @@
 			
 			var highlight = $element.find('.loading-screen-inner .text-primary');
 			
-			var step = 0;
 			var loadingTimer = setInterval(function() {
 				$scope.$apply(function() {
 					if(highlight.css('opacity') == 1)
