@@ -40,6 +40,9 @@
 				};
 
 				this.crc32 = function(str) {
+                    if(str === null || str === '')
+                        return null;
+
 				    var crcTable = window.crcTable || (window.crcTable = makeCRCTable());
 				    var crc = 0 ^ (-1);
 
