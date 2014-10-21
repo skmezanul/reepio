@@ -23,8 +23,8 @@
     'use strict';
 
     angular.module('upload')
-        .controller('UploadCtrl', ['$scope', '$location', '$timeout', '$document', '$analytics', '$modal', 'uploadService', '$rootScope', 'detectCrawlerService',
-            function ($scope, $location, $timeout, $document, $analytics, $modal, uploadService, $rootScope, detectCrawlerService) {
+        .controller('UploadCtrl', ['$scope', '$location', '$timeout', '$document', '$analytics', '$modal', 'uploadService', '$rootScope', 'detectCrawlerService', '$crypto',
+            function ($scope, $location, $timeout, $document, $analytics, $modal, uploadService, $rootScope, detectCrawlerService, $crypto) {
                 $analytics.pageTrack($location.path());
 
                 //Show the incompatible site only to real users
@@ -56,6 +56,8 @@
                     uploadService.registerFile(file.rawFile).then(function(id){
                         file.fileId = id.fileId;
                         file.uniqueUrl = window.location.protocol + '//' + location.hostname + '/d/' + id.peerId + id.fileId;
+
+                        $analytics.eventTrack('urlCreated', { category: 'upload', label: $crypto.crc32(id.peerId + id.fileId) });
                     });
                 });
 
@@ -156,9 +158,10 @@
                     });
                 };
 
-                var paste = $.paste().appendTo($('body').get(0));
+                var paste = $.paste().appendTo('body');
 
                 paste.on('pasteImage', function (e, data){
+                    console.log('test');
                     $scope.$apply(function() {
                         //data:image/png;base64,....
                         var byteString = atob(data.dataURL.split(',')[1]);
@@ -182,9 +185,6 @@
                         }
 
                         $rootScope.fileModel.files.unshift({
-                            name: 'Clipbboard Image ' + new Date() + '.' + fileType,
-                            size: byteString.length,
-                            type: mimeString,
                             fileId: null,
                             clients: {},
                             totalDownloads:  0,
@@ -200,6 +200,7 @@
                         delete data.dataURL;
                     });
                 });
+
                 paste.focus();
 
                 $('body').get(0).onpaste = function(e) {
