@@ -22,6 +22,7 @@
 (function() {
     angular.module('common')
         .service('randomService', [function () {
+            this.defaultLength = 6;
 
             /**
              * Generates a random string
@@ -29,6 +30,9 @@
              * @returns {string}
              */
             this.generateString = function(length){
+                if( ! length)
+                    length = this.defaultLength;
+
                 var text = "";
                 var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
 
