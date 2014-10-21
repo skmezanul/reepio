@@ -23,14 +23,17 @@
     angular.module('common')
         .service('detectCrawlerService', [function () {
 
-            this.regex = "(bot|borg|Mediapartners\\-Google|AdsBot\\-Google|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\\-webcrawler|converacrawler|dataparksearch|findlinks|Prerender)";
+            this.regex = "(bot|borg|google(^tv)|mediapartners(\\s|\\-\\(?google.*)|yahoo|slurp|msnbot|bingbot|adidxbot|bingpreview|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\\-webcrawler|converacrawler|dataparksearch|findlinks|Prerender|duckduckbot)";
 
             /**
              * @param {string} ua
              * @returns {boolean}
              */
             this.isCrawler = function(ua){
-                var match = ua.match(this.regex);
+                if( ! ua)
+                    return false;
+
+                var match = ua.toLowerCase().match(this.regex);
                 return match ? true : false;
             }
         }]);

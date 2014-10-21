@@ -20,5 +20,21 @@ describe('detectCrawlerService module tests', function () {
             expect(detectCrawlerService.isCrawler('AdsBot-Google')).toBe(true);
         }));
 
+        it('should detect bing agents as crawler', inject(function(detectCrawlerService){
+            expect(detectCrawlerService.isCrawler('Bingbot')).toBe(true);
+            expect(detectCrawlerService.isCrawler('Adidxbot')).toBe(true);
+            expect(detectCrawlerService.isCrawler('MSNBot')).toBe(true);
+            expect(detectCrawlerService.isCrawler('BingPreview')).toBe(true);
+        }));
+
+        it('should detect yahoo agents as crawler', inject(function(detectCrawlerService){
+            expect(detectCrawlerService.isCrawler('Yahoo Slurp')).toBe(true);
+            expect(detectCrawlerService.isCrawler('Yahoo! Slurp China')).toBe(true);
+        }));
+
+        it('should detect duckduckgo agents as crawler', inject(function(detectCrawlerService){
+            expect(detectCrawlerService.isCrawler('DuckDuckBot')).toBe(true);
+        }));
+
     });
 });
