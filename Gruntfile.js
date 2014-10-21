@@ -122,7 +122,7 @@ module.exports = function(grunt) {
 		'string-replace': {
 			index: {
 				files: {
-					'build/index.html': 'public/index.html'
+					'build/index_prod.html': 'public/index_prod.html'
 				},
 				options: {
 					replacements: [
@@ -142,8 +142,8 @@ module.exports = function(grunt) {
 				options: {
 					replacements: [
 						{
-							pattern: /index_dev\.html/g,
-							replacement: 'index.html'
+							pattern: /index\.html/g,
+							replacement: 'index_prod.html'
 						},
 						{
 							pattern: /#@@DIST_RULES/g,

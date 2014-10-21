@@ -17,9 +17,9 @@ RewriteCond $1 !^(partials|assets|scripts|robots\.txt|favicon\.ico)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^(.*)$ index_dev.html [L]
+RewriteRule ^(.*)$ index_prod.html [L]
 
-DirectoryIndex index_dev.html
+DirectoryIndex index_prod.html
 
 # mod_deflate configuration
 # http://www.brighterlamp.com/2010/10/how-to-enable-mod_deflate-on-apache-to-optimize-page-speed/

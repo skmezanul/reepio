@@ -21,7 +21,7 @@
  */
 (function() {
 	'use strict';
-	
+
 	angular.module('common')
 		.service('$crypto', function() {
 			var CryptoService = function() {
@@ -47,7 +47,7 @@
 				        crc = (crc >>> 8) ^ crcTable[(crc ^ str.charCodeAt(i)) & 0xFF];
 				    }
 
-				    return (crc ^ (-1)) >>> 0;
+				    return ((crc ^ (-1)) >>> 0).toString(16).toUpperCase();
 				};
 			};
 			
