@@ -23,6 +23,12 @@
     'use strict';
 
     angular.module('download')
+        .config(['$routeProvider', function ($routeProvider) {
+            $routeProvider.when('/d/:id', {
+                templateUrl: 'modules/download/download.html',
+                controller: 'DownloadCtrl'
+            });
+        }])
         .controller('DownloadCtrl', ['$scope', '$rootScope', '$route', '$timeout', '$location', '$analytics', '$crypto', 'config', 'downloadService', 'detectCrawlerService',
             function ($scope, $rootScope, $route, $timeout, $location, $analytics, $crypto, config, downloadService, detectCrawlerService) {
                 if(typeof $rootScope.downloadId === 'undefined'){

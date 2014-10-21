@@ -22,5 +22,5 @@
 (function() {
     'use strict';
 
-    angular.module('static',[]);
+    angular.module('static', ['ngRoute']);
 })();

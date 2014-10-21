@@ -31,9 +31,9 @@
                 name: '',
                 type: '',
                 size: 0,
-                totalChunksToRecieve: 0,
-                chunksRecieved: 0,
-                chunksofCurrentBlockRecieved: 0,
+                totalChunksToReceive: 0,
+                chunksReceived: 0,
+                chunksOfCurrentBlockReceived: 0,
                 downloadedChunksSinceLastCalculate: 0,
                 progress: 0,
                 noFileSystem: false
@@ -88,7 +88,7 @@
                                 $rootScope.$emit('DownloadDataChannelClose');
                             });
                         }.bind(this));
-            }
+            };
 
             this.parseId = function(id){
                 if ( id.hasOwnProperty('uploaderId') ) {
@@ -99,7 +99,7 @@
                     uploaderId: id.substring(0, config.peerIdLength),
                     fileId: id.substring(config.peerIdLength, config.peerIdLength+config.fileIdLength)
                 }
-            }
+            };
 
             this.startDownload = function(){
                 if(this.file.name.length == 0){
@@ -114,7 +114,7 @@
                     function(fileIdentifier){
                         this.file.fileIdentifier = fileIdentifier;
 
-                        this.requestBlock(this.file.chunksRecieved);
+                        this.requestBlock(this.file.chunksReceived);
                     }.bind(this),
                     function(fileIdentifier){
                         this.file.fileIdentifier = fileIdentifier;
@@ -124,7 +124,7 @@
                         $rootScope.$emit('NoFileSystem',  this.file);
                     }.bind(this)
                 );
-            }
+            };
 
             this.progressCalculations = function(){
 
@@ -140,7 +140,7 @@
                 });
 
                 this.file.downloadedChunksSinceLastCalculate = 0;
-            }
+            };
 
             this.requestBlock = function(chunkPosition){
                 this.connection.send({
@@ -148,7 +148,7 @@
                     fileId: this.id.fileId,
                     chunkPosition: chunkPosition
                 });
-            }
+            };
 
             this.doAuthentication = function(password){
                 this.connection.send({
@@ -156,18 +156,18 @@
                     password: password,
                     fileId: this.id.fileId
                 });
-            }
+            };
 
             this.__onPacketFileData = function(data){
-                this.file.chunksRecieved++;
-                this.file.chunksofCurrentBlockRecieved++;
+                this.file.chunksReceived++;
+                this.file.chunksOfCurrentBlockReceived++;
                 this.file.downloadedChunksSinceLastCalculate++;
 
                 storageService.addChunkToFileBuffer(this.file.fileIdentifier, data);
 
-                this.file.progress = (this.file.chunksRecieved / this.file.totalChunksToRecieve) * 100;
+                this.file.progress = (this.file.chunksReceived / this.file.totalChunksToReceive) * 100;
 
-                if(this.file.chunksRecieved == this.file.totalChunksToRecieve){
+                if(this.file.chunksReceived == this.file.totalChunksToReceive){
                     storageService.getUrlForFinishedDownload(this.file.fileIdentifier).then(
                         function(url){
                             clearInterval(this.intervalProgress);
@@ -184,33 +184,33 @@
                         }.bind(this)
                     );
                 }else{
-                    if((this.file.chunksofCurrentBlockRecieved % config.chunksPerBlock) == 0){
-                        this.file.chunksofCurrentBlockRecieved = 0;
-                        this.requestBlock(this.file.chunksRecieved);
+                    if((this.file.chunksOfCurrentBlockReceived % config.chunksPerBlock) == 0){
+                        this.file.chunksOfCurrentBlockReceived = 0;
+                        this.requestBlock(this.file.chunksReceived);
                     }
                 }
-            }
+            };
 
             this.__onPacketAuthenticationSuccessfull = function(data){
                 $rootScope.$emit('AuthenticationSuccessfull');
-            }
+            };
 
             this.__onPacketIncorrectPassword = function(data){
                 $rootScope.$emit('IncorrectPassword');
-            }
+            };
 
             this.__onPacketFileInformation = function(data){
                 this.file.name = data.fileName;
                 this.file.size = data.fileSize;
                 this.file.type = data.fileType;
-                this.file.totalChunksToRecieve = Math.ceil(data.fileSize / config.chunkSize);
+                this.file.totalChunksToReceive = Math.ceil(data.fileSize / config.chunkSize);
 
                 this.downloadState = 'ready';
 
                 storageService.checkIfFileExits(data.fileName, data.fileSize).then(
                     function(metaData){
-                        this.file.chunksRecieved = Math.ceil(metaData.size / config.chunkSize);
-                        this.file.progress = (this.file.chunksRecieved / this.file.totalChunksToRecieve) * 100;
+                        this.file.chunksReceived = Math.ceil(metaData.size / config.chunkSize);
+                        this.file.progress = (this.file.chunksReceived / this.file.totalChunksToReceive) * 100;
 
                         if(this.file.progress == 100){
                             storageService.getUrlForFinishedDownload(storageService.generateFileIdentifier(data.fileName, data.fileSize)).then(
@@ -229,11 +229,11 @@
                         $rootScope.$emit('FileInformation',  this.file);
                     }
                 );
-            }
+            };
 
             this.__onPacketAuthenticationRequest = function(data){
                 this.downloadState = 'authentication';
                 $rootScope.$emit('AuthenticationRequest');
-            }
+            };
         }]);
 })();

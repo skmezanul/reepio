@@ -23,6 +23,12 @@
     'use strict';
 
     angular.module('upload')
+        .config(['$routeProvider', function ($routeProvider) {
+            $routeProvider.when('/', {
+                templateUrl: 'modules/upload/upload.html',
+                controller: 'UploadCtrl'
+            })
+        }])
         .controller('UploadCtrl', ['$scope', '$location', '$timeout', '$document', '$analytics', '$modal', 'uploadService', '$rootScope', 'detectCrawlerService', '$crypto',
             function ($scope, $location, $timeout, $document, $analytics, $modal, uploadService, $rootScope, detectCrawlerService, $crypto) {
                 $analytics.pageTrack($location.path());

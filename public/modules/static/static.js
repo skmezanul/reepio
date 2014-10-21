@@ -23,6 +23,28 @@
     'use strict';
 
     angular.module('static')
+
+        .config(['$routeProvider', function ($routeProvider) {
+            $routeProvider
+                .when('/about', {
+                    templateUrl: 'modules/static/page-about.html',
+                    controller: 'StaticCtrl'
+                })
+                .when('/imprint', {
+                    templateUrl: 'modules/static/page-imprint.html',
+                    controller: 'StaticCtrl'
+                })
+                .when('/privacy', {
+                    templateUrl: 'modules/static/page-privacy.html',
+                    controller: 'StaticCtrl'
+                })
+                .when('/incompatible', {
+                    templateUrl: 'modules/static/page-incompatible.html',
+                    controller: 'StaticCtrl'
+                });
+
+        }])
+
         .controller('StaticCtrl', ['$analytics', '$location', function($analytics, $location) {
             $analytics.pageTrack($location.path());
         }]);

@@ -44,35 +44,9 @@
 	app.constant('appEnv', (typeof window['app_env'] !== 'undefined' ? window['app_env'] : 'prod'));
 			
 	app.config(['$routeProvider', '$locationProvider', '$analyticsProvider', function ($routeProvider, $locationProvider, $analyticsProvider) {
-		var v = '?v2';
-		
 		$routeProvider
-			.when('/about', {
-				templateUrl: 'modules/static/page-about.html' + v,
-				controller: 'StaticCtrl'
-			})
-			.when('/imprint', {
-				templateUrl: 'modules/static/page-imprint.html' + v,
-				controller: 'StaticCtrl'
-			})
-			.when('/privacy', {
-				templateUrl: 'modules/static/page-privacy.html' + v,
-				controller: 'StaticCtrl'
-			})
-			.when('/d/:id', {
-				templateUrl: 'modules/download/download.html' + v,
-				controller: 'DownloadCtrl'
-			})
-            .when('/', {
-                templateUrl: 'modules/upload/upload.html' + v,
-                controller: 'UploadCtrl'
-            })
-			.when('/incompatible', {
-				templateUrl: 'modules/static/page-incompatible.html' + v,
-				controller: 'StaticCtrl'
-			})
 			.otherwise({
-				templateUrl: 'modules/static/page-404.html' + v,
+				templateUrl: 'modules/static/page-404.html',
 				controller: 'StaticCtrl'
 			});
 
