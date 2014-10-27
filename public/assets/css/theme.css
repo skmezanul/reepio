@@ -19,7 +19,7 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -37,6 +37,7 @@ footer,
 header,
 hgroup,
 main,
+menu,
 nav,
 section,
 summary {
@@ -58,7 +59,7 @@ template {
   display: none;
 }
 a {
-  background: transparent;
+  background-color: transparent;
 }
 a:active,
 a:hover {
@@ -199,8 +200,11 @@ td,
 th {
   padding: 0;
 }
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
-  * {
+  *,
+  *:before,
+  *:after {
     background: transparent !important;
     color: #000 !important;
     box-shadow: none !important;
@@ -5491,7 +5495,7 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1050;
+  z-index: 1040;
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
@@ -5537,7 +5541,6 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
   background-color: #000000;
 }
 .modal-backdrop.fade {
@@ -6522,6 +6525,7 @@ a.lock-file {
 #page-upload .file-name h4,
 #page-download .file-name h4 {
   margin: 0 0 7px 0;
+  margin-top: 0;
   max-width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -6547,34 +6551,40 @@ a.lock-file {
   color: #bd2222;
 }
 #page-upload-intro {
-  z-index: 1028;
-  pointer-events: none;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 #page-upload-intro h1 {
   margin-top: 0;
-  font-size: 24px;
 }
 #page-upload-intro ol {
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0 0;
 }
 #page-upload-intro ol li {
   float: left;
   list-style-position: inside;
-  font-size: 19.6px;
   font-weight: bold;
-  margin: 0 25px 0 0;
   padding: 0;
   color: #bd2222;
+  font-size: 16.8px;
+  margin-right: 10px;
 }
 #page-upload-intro ol li:last-child {
   margin-right: 0;
 }
 #page-upload-intro ol li p {
   font-weight: normal;
-  font-size: 14px;
+  font-size: 15.4px;
   margin: 0;
   color: #ffffff;
+}
+#btn-upload .btn {
+  padding: 18px 30px;
+  box-shadow: 2px 2px 25px #0d0d0d;
+  margin-top: 100px;
+  font-size: 30px;
+  width: 100%;
 }
 #page-download-connecting i.fa:first-child {
   margin-right: -10px;
@@ -6744,11 +6754,6 @@ a#page-incompatible a:hover {
   font-size: 64px;
   line-height: 56px;
 }
-#drop-box > div .btn {
-  font-size: 32px;
-  padding: 18px 30px;
-  box-shadow: 2px 2px 25px #0d0d0d;
-}
 #drop-box.hasFiles {
   background: rgba(13, 13, 13, 0.8);
 }
@@ -6901,10 +6906,19 @@ a.tile:hover {
   .file-icon.file-icon-small {
     height: 70px;
   }
-  #drop-box > div {
-    top: 60%;
+  #page-upload-intro {
+    padding: 15px 20px;
   }
-  #drop-box > div .btn {
+  #page-upload-intro h1 {
+    font-size: 24px;
+  }
+  #page-upload-intro p,
+  #page-upload-intro li,
+  #page-upload-intro li p {
+    font-size: 14px;
+  }
+  #btn-upload .btn {
+    margin-top: 20px;
     font-size: 24px;
   }
   .navbar-brand {
@@ -6953,11 +6967,11 @@ a.tile:hover {
 }
 @media (min-width: 1200px) {
   #page-upload-intro ol li {
-    font-size: 25.2px;
+    font-size: 22.4px;
     margin: 0 35px 0 0;
   }
   #page-upload-intro ol li p {
-    font-size: 16.8px;
+    font-size: 15.4px;
   }
   #page-upload-intro ol li:last-child {
     margin-right: 0;
@@ -6975,6 +6989,9 @@ a.tile:hover {
   #page-download-error,
   .error-page {
     margin-top: 2%;
+  }
+  #btn-upload .btn {
+    margin-top: 20px;
   }
 }
 @media (min-height: 600px) and (max-height: 728px) {

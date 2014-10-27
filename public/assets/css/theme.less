@@ -306,6 +306,7 @@ a.lock-file {
 	.file-name {
 		h4 {
 			margin: 0 0 7px 0;
+			margin-top: 0;
 			max-width: 80%;
 			.text-overflow();
 		}
@@ -339,26 +340,25 @@ a.lock-file {
 }
 
 #page-upload-intro {
-	z-index: @zindex-navbar-fixed - 2;
-	pointer-events: none;
+	padding-top: 40px;
+	padding-bottom: 40px;
 
-	h1 {
+    h1 {
 		margin-top: 0;
-		font-size: @font-size-h3
-	}
+    }
 
 	ol {
 		padding: 0;
-		margin: 0;
+		margin: 20px 0 0 0;
 
 		li {
 			float: left;
 			list-style-position: inside;
-			font-size: @font-size-base * 1.4;
 			font-weight: bold;
-			margin: 0 25px 0 0;
 			padding: 0;
 			color: @brand-primary;
+			font-size: @font-size-base * 1.2;
+			margin-right: 10px;
 
 			&:last-child {
 				margin-right: 0;
@@ -366,12 +366,20 @@ a.lock-file {
 
 			p {
 				font-weight: normal;
-				font-size: @font-size-base * 1;
+				font-size: @font-size-base  * 1.1;
 				margin: 0;
 				color: #fff
 			}
 		}
 	}
+}
+
+#btn-upload .btn {
+	padding: 18px 30px;
+	box-shadow: 2px 2px 25px @body-bg;
+	margin-top: 100px;
+	font-size: @font-size-h2;
+	width: 100%
 }
 
 #page-download-connecting {
@@ -582,12 +590,6 @@ a.lock-file {
 			font-size: 64px;
 			line-height: 56px
 		}
-
-		.btn {
-			font-size: 32px;
-			padding: 18px 30px;
-			box-shadow: 2px 2px 25px @body-bg
-		}
 	}
 
 	&.hasFiles {
@@ -771,14 +773,20 @@ a.lock-file {
 		}
 	}
 
-	#drop-box {
-		> div {
-			top: 60%;
+	#page-upload-intro {
+		padding: 15px 20px;
 
-			.btn {
-				font-size: 24px
-			}
+		h1 {
+			font-size: @font-size-h3
 		}
+		p, li, li p {
+			font-size: @font-size-base
+		}
+	}
+
+	#btn-upload .btn {
+		margin-top: 20px;
+		font-size: @font-size-h3
 	}
 
 	.navbar-brand {
@@ -837,11 +845,11 @@ a.lock-file {
 
 @media (min-width: @screen-lg-min) {
 	#page-upload-intro ol li {
-		font-size: @font-size-base * 1.8;
+		font-size: @font-size-base * 1.6;
 		margin: 0 35px 0 0;
 
 		p {
-			font-size: @font-size-base * 1.2;
+			font-size: @font-size-base * 1.1;
 		}
 
 		&:last-child {
@@ -865,6 +873,11 @@ a.lock-file {
 	.error-page {
 		margin-top: 2%;
 	}
+
+	#btn-upload .btn {
+		margin-top: 20px;
+	}
+
 }
 
 @media (min-height: 600px) and (max-height: 728px) {

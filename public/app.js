@@ -43,14 +43,14 @@
 
 	app.constant('appEnv', (typeof window['app_env'] !== 'undefined' ? window['app_env'] : 'prod'));
 			
-	app.config(['$routeProvider', '$locationProvider', '$analyticsProvider', function ($routeProvider, $locationProvider, $analyticsProvider) {
+	app.config(['$routeProvider', '$locationProvider', '$analyticsProvider', 'appEnv', function ($routeProvider, $locationProvider, $analyticsProvider, appEnv) {
 		$routeProvider
 			.otherwise({
 				templateUrl: 'modules/static/page-404.html',
 				controller: 'StaticCtrl'
 			});
 
-		$locationProvider.html5Mode(app.constant('appEnv') !== 'dev');
+		$locationProvider.html5Mode(appEnv !== 'dev');
   		$analyticsProvider.virtualPageviews(false);
   		
 	}]);

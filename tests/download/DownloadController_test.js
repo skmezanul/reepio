@@ -24,8 +24,5 @@ describe('download module tests', function () {
                 '$scope': scope
             });
         }));
-
-        it('should have the correct downloadId', inject(function () {
-        }));
     });
 });

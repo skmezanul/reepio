@@ -1,38 +1,38 @@
 <div id="page-upload">
-
-    <div id="drop-box" p2m-drop-zone max-files="8" files="fileModel.files" ng-animate ng-hide="getIsFileDropped()" ng-class="{ 'hasFiles': fileModel.files.length > 0}">
-        <div >
-            <button ng-hide="fileModel.files.length > 0" class="btn btn-primary btn-lg">
-                <i class="glyphicon glyphicon-plus"></i>
-                Add (or drop) files...
-            </button>
-
-            <div>
-                <p ng-show="fileModel.files.length > 0">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <span class="clearfix"></span>
-                    Drop files here
+    <section class="row section section-page" ng-hide="getIsFileDropped()" id="page-upload-intro">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>reep<span class="text-primary">.io</span> - P2P in your browser</h1>
+                <p>
+                    With reep.io you can transfer files directly to another browser.
+                    Just point to a file you want to share. Your peer will then be able to download this file
+                    directly from your browser. Made possible with the WebRTC protocol.
                 </p>
             </div>
+            <div class="col-sm-12">
+                <ol>
+                    <li><p>Drag any file(s) here</p></li>
+                    <li><p>Send link to a friend</p></li>
+                    <li><p>Transfer directly via p2p</p></li>
+                </ol>
+                <div class="clearfix"></div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div ng-hide="getIsFileDropped()">
-        <div id="page-upload-intro" class="well well-lg col-sm-12">
-            <ol>
-                <li><p>Drag any file(s) here</p></li>
-                <li><p>Send link to a friend</p></li>
-                <li><p>Transfer directly via p2p</p></li>
-            </ol>
-            <div class="clearfix"></div>
-        </div>
+    <div id="drop-box" p2m-drop-zone max-files="8" files="fileModel.files" ng-animate ng-hide="getIsFileDropped()" ng-class="{ 'hasFiles': fileModel.files.length > 0}">
+        <p ng-show="fileModel.files.length > 0">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span class="clearfix"></span>
+            Drop files here...
+        </p>
     </div>
 
     <div ng-show="getIsFileDropped()">
         <div id="page-upload-warning" class="pull-right">
             <p>
                 <i class="fa fa-warning"></i>
-                Keep this browser tab open to enable p2p transfer.
+                Keep this browser tab open to enable P2P transfer.
             </p>
         </div>
         <div class="clearfix"></div>
@@ -53,13 +53,13 @@
                         <button type="button" class="close pull-right" aria-hidden="true" ng-click="removeFile(file.uniqueUrl)">&times;</button>
                         <div class="form-group">
                             <div class="file-name">
-                                <h4 title="{{ file.rawFile.name }}" class="pull-left"> {{ file.rawFile.name }} </h4>
-                                <span class="pull-right text-muted hidden-xs">{{ file.rawFile.size|humanFileSize }}</span>
+                                <h4 ng-attr-title="{{ file.rawFile.name }}" class="pull-left" ng-bind="file.rawFile.name"></h4>
+                                <span class="pull-right text-muted hidden-xs" ng-bind="file.rawFile.size|humanFileSize"></span>
                             </div>
                             <div class="clearfix"></div>
-                            <input type="text" class="form-control" placeholder="Generating Url..." value="{{ file.uniqueUrl }}" onclick="select()" readonly>
+                            <input type="text" class="form-control" placeholder="Generating Url..." ng-value="file.uniqueUrl" onclick="select()" readonly>
                             <p class="text-muted">
-                                Downloaded {{ file.totalDownloads }}x
+                                Downloaded <span ng-bind="file.totalDownloads"></span>x
                             </p>
                         </div>
 
@@ -69,21 +69,23 @@
                                     <i class="fa fa-user"></i>
                                     <p2m-progress-bar percent="client.progress"></p2m-progress-bar>
                                 </div>
-                                <small>{{ client.speed|humanFileSize:0 }}/s</small>
+                                <small ng-bind="client.speed|humanFileSize:0">/s</small>
                             </div>
                             <div class="text-muted" ng-show="file.clients.length > 6">
-                                ... {{ file.clients.length - 6 }} more
+                                ... <span ng-bind="file.clients.length - 6"></span> more
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="row" id="btn-upload">
         <div class="col-sm-8 col-sm-push-2">
             <button class="btn btn-primary btn-lg col-sm-12" ng-click="addFile()">
                 <i class="glyphicon glyphicon-plus"></i>
-                Add (or drop) files...
+                Add or drop files...
             </button>
         </div>
     </div>
