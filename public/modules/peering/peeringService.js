@@ -47,7 +47,6 @@
                 });
 
                 timeout = setTimeout(function () {
-                    console.log(peer);
                     deferred.reject();
                 }, typeof config.peerConfig.timeout === 'undefined' ? 10000 : config.peerConfig.timeout);
 

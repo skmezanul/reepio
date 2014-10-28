@@ -21,11 +21,11 @@
     </section>
 
     <div id="drop-box" p2m-drop-zone max-files="8" files="fileModel.files" ng-animate ng-hide="getIsFileDropped()" ng-class="{ 'hasFiles': fileModel.files.length > 0}">
-        <p ng-show="fileModel.files.length > 0">
+        <div ng-show="getIsFileDropped()">
             <i class="glyphicon glyphicon-plus"></i>
             <span class="clearfix"></span>
             Drop files here...
-        </p>
+        </div>
     </div>
 
     <div ng-show="getIsFileDropped()">

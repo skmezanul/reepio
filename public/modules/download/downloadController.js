@@ -74,7 +74,7 @@
 
                 $scope.doAuthentication = function(){
                     downloadService.doAuthentication($scope.password);
-                }
+                };
 
                 $rootScope.$on('FileInformation', function(event, data) {
                     $timeout(function(){
@@ -89,8 +89,9 @@
                         if($scope.isImage){
 
                         }else{
-                            if($('#download-frame').length > 0){
-                                $('#download-frame').get(0).click();
+							var downloadFrame = $('#download-frame');
+                            if(downloadFrame.length > 0){
+								downloadFrame.get(0).click();
                             }
                         }
                     });

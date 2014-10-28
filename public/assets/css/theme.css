@@ -6551,6 +6551,7 @@ a.lock-file {
   color: #bd2222;
 }
 #page-upload-intro {
+  margin-top: 30px;
   padding-top: 40px;
   padding-bottom: 40px;
 }
@@ -6747,6 +6748,7 @@ a#page-incompatible a:hover {
   text-align: center;
   z-index: 1029;
   cursor: pointer;
+  font-size: 36px;
 }
 #drop-box > div {
   position: absolute;
@@ -6755,8 +6757,6 @@ a#page-incompatible a:hover {
   width: 100%;
   height: 100px;
   margin-top: -50px;
-}
-#drop-box > div p {
   font-size: 64px;
   line-height: 56px;
 }

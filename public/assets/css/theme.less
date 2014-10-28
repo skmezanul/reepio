@@ -340,6 +340,7 @@ a.lock-file {
 }
 
 #page-upload-intro {
+	margin-top: 30px;
 	padding-top: 40px;
 	padding-bottom: 40px;
 
@@ -584,6 +585,7 @@ a.lock-file {
 	text-align: center;
 	z-index: @zindex-navbar-fixed - 1;
 	cursor: pointer;
+	font-size: @font-size-h1;
 
 	> div {
 		position: absolute;
@@ -592,18 +594,15 @@ a.lock-file {
 		width: 100%;
 		height: 100px;
 		margin-top: -50px;
-
-		p {
-			font-size: 64px;
-			line-height: 56px
-		}
+		font-size: 64px;
+		line-height: 56px
 	}
 
 	&.hasFiles {
     	&, & * {
-    		pointer-events:none;    		
+    		pointer-events:none;
     	}
-    	
+
 		background: rgba(red(@body-bg), green(@body-bg), blue(@body-bg), 0.8);
 	}
 }
