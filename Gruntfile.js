@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 						cwd: 'public', 
 						dest: 'dist/',
 						src: [
-							'assets/css/*.min.css', 
+							'assets/css/*.min.css',
 							'assets/fonts/**', 
 							'assets/images/**', 
 							'assets/js/socialshareprivacy/**',
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
 					minifyJS: true
 				},
 				files: {
-					'dist/index.html': 'build/index.html'
+					'dist/index.html': 'build/index_prod.html'
 				}
 			}
 		},

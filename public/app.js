@@ -50,7 +50,7 @@
 				controller: 'StaticCtrl'
 			});
 
-		$locationProvider.html5Mode(appEnv !== 'dev');
+		//$locationProvider.html5Mode(appEnv !== 'dev');
   		$analyticsProvider.virtualPageviews(false);
   		
 	}]);

@@ -6556,6 +6556,12 @@ a.lock-file {
 }
 #page-upload-intro h1 {
   margin-top: 0;
+  font-size: 24px;
+}
+#page-upload-intro p {
+  color: #eeeeee;
+  line-height: 1.85714286;
+  margin: 30px 0 10px;
 }
 #page-upload-intro ol {
   padding: 0;
@@ -6909,9 +6915,6 @@ a.tile:hover {
   #page-upload-intro {
     padding: 15px 20px;
   }
-  #page-upload-intro h1 {
-    font-size: 24px;
-  }
   #page-upload-intro p,
   #page-upload-intro li,
   #page-upload-intro li p {
@@ -6946,7 +6949,6 @@ a.tile:hover {
 }
 @media (min-width: 992px) {
   #page-upload-intro ol li {
-    font-size: 22.4px;
     margin: 0 35px 0 0;
   }
   #page-upload-intro ol li p {
@@ -6967,7 +6969,6 @@ a.tile:hover {
 }
 @media (min-width: 1200px) {
   #page-upload-intro ol li {
-    font-size: 22.4px;
     margin: 0 35px 0 0;
   }
   #page-upload-intro ol li p {
