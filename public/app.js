@@ -50,9 +50,10 @@
 				controller: 'StaticCtrl'
 			});
 
-		$locationProvider.html5Mode(appEnv !== 'dev');
+		if(app.constant('appEnv') === 'prod')
+			$locationProvider.html5Mode(appEnv !== 'dev');
+
   		$analyticsProvider.virtualPageviews(false);
-  		
 	}]);
 	
 	app.run(['$rootScope', '$location', '$route', '$document', 'appEnv',

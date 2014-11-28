@@ -142,7 +142,7 @@
                     </ul>
 
                     <div class="navbar-right col-sm-3" ng-hide="getIsPageActive('/d') || ! downloadId || downloadError">
-                        <a ng-href="/d/{{ downloadId }}">
+                        <a ng-href="#/d/{{ downloadId }}">
                             <div class="well well-sm">
                                 <span ng-bind="downloadService.file.name|maxLength:15"></span>
                                 <p2m-progress-bar percent="downloadService.file.progress"></p2m-progress-bar>

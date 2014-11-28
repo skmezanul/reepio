@@ -122,7 +122,7 @@ module.exports = function(grunt) {
 		'string-replace': {
 			index: {
 				files: {
-					'build/index_prod.html': 'public/index.html'
+					'build/index.html': 'public/index_prod.html'
 				},
 				options: {
 					replacements: [
@@ -160,7 +160,7 @@ module.exports = function(grunt) {
 				options: {
 					replacements: [
 						{
-							pattern: /dev\.reep\.io/g,
+							pattern: /127\.0\.0\.1/g,
 							replacement: 'reep.io'
 						}
 					]
