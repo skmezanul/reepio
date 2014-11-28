@@ -69,59 +69,6 @@
                     });
                 });
 
-                $rootScope.$on('UploadStart', function(event, peerId, fileId){
-                    $scope.$apply(function () {
-                        for (var i = 0; i < $scope.fileModel.files.length; ++i) {
-                            if($scope.fileModel.files[i].fileId == fileId){
-                                $scope.fileModel.files[i].clients[peerId] = {
-                                    progress: 0,
-                                    speed: 0
-                                };
-
-                                break;
-                            }
-                        }
-                    });
-                });
-
-                $rootScope.$on('UploadProgress', function (event, peerId, fileId, percent, bytesPerSecond) {
-                    $scope.$apply(function(){
-                        for (var i = 0; i < $scope.fileModel.files.length; ++i) {
-                            if($scope.fileModel.files[i].fileId == fileId && $scope.fileModel.files[i].clients[peerId] !== undefined){
-                                $scope.fileModel.files[i].clients[peerId].progress = percent;
-                                $scope.fileModel.files[i].clients[peerId].speed = bytesPerSecond;
-
-                                break;
-                            }
-                        }
-                    });
-                });
-
-                $rootScope.$on('UploadFinished', function (event, peerId, fileId) {
-                    $scope.$apply(function(){
-                        for (var i = 0; i < $scope.fileModel.files.length; ++i) {
-                            if($scope.fileModel.files[i].fileId == fileId){
-                                delete $scope.fileModel.files[i].clients[peerId];
-                                $scope.fileModel.files[i].totalDownloads++;
-
-                                break;
-                            }
-                        }
-                    });
-                });
-
-                $rootScope.$on('dataChannelClose', function(event, peerId, fileId){
-                    $scope.$apply(function () {
-                        for (var i = 0; i < $rootScope.fileModel.files.length; ++i) {
-                            if($rootScope.fileModel.files[i].fileId == fileId){
-                                delete $rootScope.fileModel.files[i].clients[peerId];
-                            }
-
-                            break;
-                        }
-                    });
-                });
-
                 $scope.getIsFileDropped = function(){
                     return $rootScope.fileModel.files.length > 0;
                 };
@@ -165,6 +112,59 @@
                         file.password = password;
                     });
                 };
+
+				// save unsubscribe functions to be able unsubscribe no destruction of this controller
+				var rootScopeEvents = [
+					$rootScope.$on('UploadStart', function(event, peerId, fileId){
+						$scope.$apply(function () {
+							for (var i = 0; i < $scope.fileModel.files.length; ++i) {
+								if($scope.fileModel.files[i].fileId == fileId){
+									$scope.fileModel.files[i].clients[peerId] = {
+										progress: 0,
+										speed: 0
+									};
+
+									break;
+								}
+							}
+						});
+					}),
+					$rootScope.$on('UploadProgress', function (event, peerId, fileId, percent, bytesPerSecond) {
+						$scope.$apply(function(){
+							for (var i = 0; i < $scope.fileModel.files.length; ++i) {
+								if($scope.fileModel.files[i].fileId == fileId && $scope.fileModel.files[i].clients[peerId] !== undefined){
+									$scope.fileModel.files[i].clients[peerId].progress = percent;
+									$scope.fileModel.files[i].clients[peerId].speed = bytesPerSecond;
+
+									break;
+								}
+							}
+						});
+					}),
+					$rootScope.$on('UploadFinished', function (event, peerId, fileId) {
+						$scope.$apply(function(){
+							for (var i = 0; i < $scope.fileModel.files.length; ++i) {
+								if($scope.fileModel.files[i].fileId == fileId){
+									delete $scope.fileModel.files[i].clients[peerId];
+									$scope.fileModel.files[i].totalDownloads++;
+
+									break;
+								}
+							}
+						});
+					}),
+					$rootScope.$on('dataChannelClose', function(event, peerId, fileId){
+						$scope.$apply(function () {
+							for (var i = 0; i < $rootScope.fileModel.files.length; ++i) {
+								if($rootScope.fileModel.files[i].fileId == fileId){
+									delete $rootScope.fileModel.files[i].clients[peerId];
+								}
+
+								break;
+							}
+						});
+					})
+				];
 
                 var paste = $.paste().appendTo('body');
 
@@ -217,6 +217,10 @@
 
                 $scope.$on('$destroy', function(e) {
                     paste.remove();
+
+					angular.forEach(rootScopeEvents, function (offDelegate) {
+						offDelegate();
+					});
                 });
             }]);
 })();
