@@ -122,7 +122,7 @@ module.exports = function(grunt) {
 		'string-replace': {
 			index: {
 				files: {
-					'build/index_prod.html': 'public/index_prod.html'
+					'build/index_prod.html': 'public/index.html'
 				},
 				options: {
 					replacements: [
@@ -142,20 +142,16 @@ module.exports = function(grunt) {
 				options: {
 					replacements: [
 						{
-							pattern: /index\.html/g,
-							replacement: 'index_prod.html'
-						},
-						{
 							pattern: /#@@DIST_RULES/g,
 							replacement: function(match, offset, string) {
 								return 	'<IfModule mod_ssl.c>\n' +
 										'RewriteCond %{HTTPS} off\n' +
 										'RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]\n' +
 										'</IfModule>';
-							}					
+							}
 						}
 					]
-				}				
+				}
 			},
 			appMinJs: {
 				files: {
@@ -179,7 +175,7 @@ module.exports = function(grunt) {
 					minifyJS: true
 				},
 				files: {
-					'dist/index.html': 'build/index_prod.html'
+					'dist/index.html': 'build/index.html'
 				}
 			}
 		},
@@ -195,7 +191,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-fingerprint');
 	grunt.loadNpmTasks('grunt-string-replace');
-	
+	grunt.loadNpmTasks('grunt-deploy');
 
 	grunt.registerTask('default', [
 		'ngAnnotate',

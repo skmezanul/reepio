@@ -46,7 +46,7 @@
                         </div>
                         
                         <a href="" class="lock-file" ng-click="lockFile(file)">
-                            <i class="fa" ng-class="{ 'fa-lock': file.password, 'fa-unlock': ! file.password }"></i>
+                            <i class="fa" ng-class="{'fa-lock': file.password, 'fa-unlock': ! file.password }"></i>
                         </a>
                     </div>
                     <div class="media-body">
@@ -69,7 +69,7 @@
                                     <i class="fa fa-user"></i>
                                     <p2m-progress-bar percent="client.progress"></p2m-progress-bar>
                                 </div>
-                                <small ng-bind="client.speed|humanFileSize:0">/s</small>
+                                <small><span ng-bind="client.speed|humanFileSize:0"></span>/s</small>
                             </div>
                             <div class="text-muted" ng-show="file.clients.length > 6">
                                 ... <span ng-bind="file.clients.length - 6"></span> more
