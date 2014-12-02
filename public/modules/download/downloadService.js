@@ -51,43 +51,47 @@
                 this.id = this.parseId(id);
 
                 peeringService
-                        .getPeer()
-                        .then(function(peer){
-                            this.connection = peer.connect(this.id.uploaderId, {
-                                reliable: true
-                            });
+					.getPeer()
+					.then(function(peer){
+						this.connection = peer.connect(this.id.uploaderId, {
+							reliable: true
+						});
 
-                            this.connection.on('open', function(){
-                                if(this.file.name.length == 0){
-                                    this.connection.send({
-                                        packet: 'RequestFileInformation',
-                                        fileId: this.id.fileId
-                                    });
-                                }
-                            }.bind(this));
+						this.connection.on('close', function(e){
+							$rootScope.$emit('DownloadDataChannelClose');
+						});
 
-                            this.connection.on('close', function(){
-                                $rootScope.$emit('DownloadDataChannelClose');
-                            });
+						this.connection.on('data', function(data){
+							if(data instanceof ArrayBuffer){
+								this.__onPacketFileData(data);
+								return;
+							}
 
-                            this.connection.on('data', function(data){
-                                if(data instanceof ArrayBuffer){
-                                    this.__onPacketFileData(data);
-                                    return;
-                                }
+							var fn = this['__onPacket' + data.packet];
 
-                                var fn = this['__onPacket' + data.packet];
+							if(typeof fn === 'function') {
+								fn = fn.bind(this);
+								fn(data);
+							}
+						}.bind(this));
 
-                                if(typeof fn === 'function') {
-                                    fn = fn.bind(this);
-                                    fn(data);
-                                }
-                            }.bind(this));
+						this.connection.on('open', function(){
+							if(this.file.name.length == 0){
+								this.connection.send({
+									packet: 'RequestFileInformation',
+									fileId: this.id.fileId
+								});
+							}
+						}.bind(this));
 
-                            this.connection.on('error', function(e){
-                                $rootScope.$emit('DownloadDataChannelClose');
-                            });
-                        }.bind(this));
+						this.connection.on('error', function(e){
+							$rootScope.$emit('DownloadDataChannelClose');
+						});
+
+						peer.on('error', function(e){
+							$rootScope.$emit('DownloadDataChannelClose');
+						});
+					}.bind(this));
             };
 
             this.parseId = function(id){

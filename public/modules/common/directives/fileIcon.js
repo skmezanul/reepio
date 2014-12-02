@@ -66,7 +66,7 @@
 					fileType: '=',
 					'class': '@?class'
 				},
-				template: '<div class="file-icon {{ class }}"><i class="fa {{ iconType }}"></i></div>',
+				template: '<div class="file-icon {{ class }}"><span class="fa {{ iconType }}"></span></div>',
 				link: function (scope, el, attrs) {
 					scope['class'] = attrs['class'] || 'file-icon-default';
 

@@ -161,6 +161,15 @@ body {
 			margin: 0;
 		}
 	}
+
+
+	@media (max-width: @screen-xs-max) {
+		.navbar-text {
+			padding-top: 10px;
+			padding-bottom: 10px;
+			margin: 0 0 0 10px;
+		}
+	}
 }
 
 .navbar-brand {
@@ -177,6 +186,10 @@ body {
 		font-size: @font-size-base * .65;
 		line-height: @font-size-small * .65;
 		vertical-align: top
+	}
+
+	@media (max-width: @screen-xs-max) {
+		padding-left: 60px;
 	}
 }
 
@@ -286,6 +299,16 @@ body {
 		width: 60px;
 		height: 60px;
 	}
+
+	@media (max-width: @screen-xs-max) {
+		&.file-icon-default,
+		&.file-icon-small,
+		&.file-icon-large {
+			.bg-primary;
+			width: 100%;
+			margin-bottom: 15px;
+		}
+	}
 }
 
 a.lock-file {
@@ -302,11 +325,11 @@ a.lock-file {
 	.text-center;
 }
 
-#page-upload, #page-download {
+#page-upload,
+#page-download {
 	.file-name {
 		h4 {
 			margin: 0 0 7px 0;
-			margin-top: 0;
 			max-width: 80%;
 			.text-overflow();
 		}
@@ -315,18 +338,55 @@ a.lock-file {
 			margin-right: 15px;
 		}
 	}
+
+	@media (max-width: @screen-xs-max) {
+		.file-name h4 {
+			max-width: 90%
+		}
+	}
 }
 
-#page-download.page-download-streaming,
-#page-download.page-download-image {
-	margin-top: 0;
+#page-download {
+
+	&.page-download-streaming {
+		margin-top: 0;
+	}
+
+	&.page-download-image {
+		margin-top: 0;
+
+		.page-download-image-preview img {
+			max-height: 400px;
+			margin: 20px auto;
+			box-shadow: #000 0 0 25px
+		}
+	}
+
+	@media (max-width: @screen-xs-max) {
+		.file-icon.file-icon-small {
+			font-size: 32px;
+		}
+	}
 }
 
-#page-download.page-download-image {
-	.page-download-image-preview img {
-		max-height: 400px;
-		margin: 20px auto;
-		box-shadow: #000 0 0 25px
+#page-download,
+#page-download-authenticating,
+#page-download-connecting,
+#page-download-error,
+#page-upload-intro {
+	@media (min-width: @screen-sm-min) {
+		margin-top: 15%;
+		margin-bottom: 15%;
+	}
+
+	@media (max-height: 700px) {
+		margin-top: 5%;
+		margin-bottom: 5%;
+	}
+
+	@media (max-height: 500px) {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 }
 
@@ -380,30 +440,64 @@ a.lock-file {
 			}
 		}
 	}
-}
 
-#btn-upload .btn {
-	padding: 18px 30px;
-	box-shadow: 2px 2px 25px @body-bg;
-	margin-top: 100px;
-	font-size: @font-size-h2;
-	width: 100%
+	@media (max-width: @screen-xs-max) {
+		padding: 15px 20px;
+
+		p, li, li p {
+			font-size: @font-size-base;
+		}
+	}
+
+	@media (max-height: 600px) {
+		.lead {
+			display: none
+		}
+	}
+
+	@media (max-height: 500px) {
+		padding: 15px 20px;
+
+		h1 {
+			display: none
+		}
+
+		ol {
+			margin-top: 0;
+		}
+	}
 }
 
 #page-download-connecting {
-	i.fa:first-child {
+	span.fa:first-child {
 		margin-right: -10px;
 	}
 
-	i.fa:nth-child(2) {
+	span.fa:nth-child(2) {
 		margin-right: -10px;
+	}
+
+	@media (max-width: @screen-xs-max) {
+		margin-top: 40px;
 	}
 }
 
 #page-download-authenticating {
 	.input-group {
 		margin: 15px 0 10px
-	}	
+	}
+
+	.fa.fa-lock {
+		font-size: 64px;
+	}
+
+	@media (max-width: @screen-xs-max) {
+		margin-top: 0px;
+
+		.fa.fa-lock {
+			font-size: 32px;
+		}
+	}
 }
 
 #page-incompatible {
@@ -431,7 +525,7 @@ a.lock-file {
 			.box-shadow(@shadow: 0 7px 0 #000);
 		}
 
-		i {
+		.icon-chrome, .icon-firefox, .icon-opera {
 			font-size: 64px
 		}
 	}
@@ -496,6 +590,35 @@ a.lock-file {
 	.section-about-us {
 		margin-bottom: 400px;
 	}
+
+	@media (max-width: @screen-xs-max) {
+		margin-top: 0;
+
+		.section {
+			padding: 25px 40px
+		}
+	}
+}
+
+/** Upload button
+---------------------------- */
+#btn-upload {
+	width: 100%;
+
+	@media (max-width: @screen-xs-max) {
+		margin-top: 20px;
+		font-size: @font-size-h3
+	}
+
+	@media (min-width: @screen-sm-min) {
+		padding: 18px 30px;
+		box-shadow: 2px 2px 25px @body-bg;
+		font-size: @font-size-h2;
+	}
+
+	@media (max-height: 500px) {
+		margin-top: 20px;
+	}
 }
 
 
@@ -521,8 +644,28 @@ a.lock-file {
 
 /** Upload Queue
 ---------------------------- */
-.upload-queue-item {
-	margin: 50px 0;
+.upload-queue {
+	margin: 40px 0 60px;
+
+	.upload-queue-item {
+		padding: 20px;
+		background: @well-bg;
+		border-bottom: 1px solid @gray-dark;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+
+		@media (max-width: @screen-xs-max) {
+			padding: 10px;
+
+			.list-inline {
+				li {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
 
 	ul {
 		margin: 0;
@@ -569,8 +712,16 @@ a.lock-file {
 	}
 	
 	input[readonly] {
-		background: @input-bg;	
+		background: @input-bg;
 		cursor: pointer;
+	}
+
+	h4 {
+		color: lighten(@text-muted, 20%)
+	}
+
+	.form-group {
+		margin-bottom: 5px;
 	}
 }
 
@@ -737,71 +888,18 @@ a.lock-file {
 	}
 }
 
-/** Media Queries
+/** Ads
 ---------------------------- */
-@media (max-width: @screen-xs-max) {
-	#page-download,
-	#page-upload {
+#ads-footer {
+	margin-top: 40px;
+
+	@media (max-height: 500px) {
 		margin-top: 0;
-
-		.file-name h4 {
-			max-width: 100%
-		}
-	}
-
-	#page-download {
-		.file-icon {
-			&.file-icon-small {
-				font-size: 32px
-			}
-		}
-	}
-	
-	#page-about {
-		margin-top: 80px;
-	}
-	
-	.section {
-		padding: 25px 40px
-	}
-
-	.file-icon {
-		&.file-icon-default,
-		&.file-icon-small,
-		&.file-icon-large{
-			.bg-primary;
-			width: 100%;
-			margin-bottom: 15px;
-		}
-
-		&.file-icon-small {
-			height: 70px;
-		}
-	}
-
-	#page-upload-intro {
-		padding: 15px 20px;
-
-		p, li, li p {
-			font-size: @font-size-base;
-		}
-	}
-
-	#btn-upload .btn {
-		margin-top: 20px;
-		font-size: @font-size-h3
-	}
-
-	.navbar-brand {
-		padding-left: 60px;
-	}
-	
-	.navbar-text {
-		padding-top: 10px;
-		padding-bottom: 10px;
-		margin: 0 0 0 10px;
 	}
 }
+
+/** Media Queries
+---------------------------- */
 
 @media (min-width: @screen-sm-min) {
 	#header .nav .navbar-nav {
@@ -810,7 +908,7 @@ a.lock-file {
 }
 
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-	.section {	
+	.section {
 		padding: 80px 30px;
 	}
 	
@@ -856,45 +954,5 @@ a.lock-file {
 		&:last-child {
 			margin-right: 0;
 		}
-	}
-}
-
-
-@media (max-height: 500px) {
-	#page-upload-intro {
-		display: none
-	}
-}
-
-@media (max-height: 600px) {
-	#page-download,
-	#page-download-connecting,
-	#page-download-authenticating,
-	#page-download-error,
-	.error-page {
-		margin-top: 2%;
-	}
-
-	#btn-upload .btn {
-		margin-top: 20px;
-	}
-
-}
-
-@media (min-height: 600px) and (max-height: 728px) {
-	#page-download,
-	#page-download-connecting,
-	#page-download-authenticating,
-	#page-download-error {
-		margin-top: 10%;
-	}
-}
-
-@media (min-height: 728px) {
-	#page-download,
-	#page-download-connecting,
-	#page-download-authenticating,
-	#page-download-error {
-		margin-top: 30%;
 	}
 }

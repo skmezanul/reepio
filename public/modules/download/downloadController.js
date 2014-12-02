@@ -35,7 +35,7 @@
                     $rootScope.downloadId = $route.current.params.id;
                     $rootScope.cryptoDownloadId = $crypto.crc32($route.current.params.id);
                     $rootScope.downloadService = downloadService;
-                }
+				}
 
                 // dismiss key
                 $analytics.pageTrack('/d/' + $rootScope.cryptoDownloadId);
@@ -46,13 +46,19 @@
                     return;
                 }
 
-//                $scope.isStreamAble = false;
-//                $scope.isStreamingRunning = false;
-//                $scope.isImage = false;
+                $scope.isStreamAble = false;
+                $scope.isStreamingRunning = false;
+                $scope.isImage = false;
 
-                if(downloadService.id === null && $rootScope.downloadId.length == (config.peerIdLength + config.fileIdLength)){
+                if($rootScope.downloadId.length == (config.peerIdLength + config.fileIdLength))
+				{
                     downloadService.requestFileInformation($rootScope.downloadId);
                 }
+				else
+				{
+					$scope.downloadError = 'Invalid Download';
+					$scope.downloadErrorDescription = 'The download link you are using is invalid.';
+				}
 
                 $scope.downloadFile = function(){
 //                    $scope.isStreamingRunning = false;
