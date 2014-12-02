@@ -6438,6 +6438,9 @@ a.navbar-brand .beta-badge:focus {
   color: #555555;
   border-color: #cccccc;
 }
+.modal .close {
+  color: #333333;
+}
 /** Animations
 ---------------------------- */
 .view-animated {

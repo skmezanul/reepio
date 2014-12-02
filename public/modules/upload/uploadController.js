@@ -104,13 +104,22 @@
                             $scope.close = function() {
                                 $scope.$dismiss('cancel');
                             };
+
+							$scope.clear = function() {
+								$scope.$close('');
+							}
                         }]
                     });
 
-                    modalInstance.result.then(function (password) {
-                        uploadService.setPasswordForFile(file.fileId, password);
-                        file.password = password;
-                    });
+                    modalInstance.result
+						.then(function (password) {
+							uploadService.setPasswordForFile(file.fileId, password);
+							file.password = password;
+						})
+						.catch(function () {
+							uploadService.setPasswordForFile(file.fileId, '');
+							file.password = '';
+						});
                 };
 
 				// save unsubscribe functions to be able unsubscribe no destruction of this controller
