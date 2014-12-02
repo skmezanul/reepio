@@ -15,8 +15,9 @@ describe('download module tests', function () {
             $rootScope.cryptoDownloadId = $crypto.crc32($rootScope.downloadId);
             $rootScope.downloadService = function(){
                 this.requestFileInformation = function(downloadId){
-
                 };
+				this.startDownload = function () {
+				};
             };
 
             scope = $rootScope.$new();
@@ -24,5 +25,12 @@ describe('download module tests', function () {
                 '$scope': scope
             });
         }));
+
+		it('should have a function "downloadFile" that starts the download', inject(function (downloadService) {
+			spyOn(downloadService, 'startDownload');
+
+			scope.downloadFile();
+			expect(downloadService.startDownload).toHaveBeenCalled();
+		}));
     });
 });

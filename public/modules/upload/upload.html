@@ -2,20 +2,19 @@
     <section class="row section section-page" ng-hide="getIsFileDropped()" id="page-upload-intro">
         <div class="row">
             <div class="col-sm-12">
-                <h1>reep<span class="text-primary">.io</span> - P2P in your browser</h1>
+                <h1>reep<span class="text-primary">.io</span> - peer-to-peer in your browser</h1>
                 <p>
                     With reep.io you can transfer files directly to another browser.
                     Just point to a file you want to share. Your peer will then be able to download this file
-                    directly from your browser. Made possible with the WebRTC protocol.
+                    directly from you. No data is stored on a server in-between.
                 </p>
             </div>
             <div class="col-sm-12">
                 <ol>
-                    <li><p>Drag any file(s) here</p></li>
+                    <li><p>Drop file(s) here</p></li>
                     <li><p>Send link to a friend</p></li>
-                    <li><p>Transfer directly via p2p</p></li>
+                    <li><p>Transfer via peer-to-peer</p></li>
                 </ol>
-                <div class="clearfix"></div>
             </div>
         </div>
     </section>
@@ -29,13 +28,10 @@
     </div>
 
     <div ng-show="getIsFileDropped()">
-        <div id="page-upload-warning" class="pull-right">
-            <p>
-                <i class="fa fa-warning"></i>
-                Keep this browser tab open to enable P2P transfer.
-            </p>
-        </div>
-        <div class="clearfix"></div>
+        <p class="lead">
+            Copy the link below and send it to a friend to start a peer-to-peer file transfer. Do not close
+            this browser tab to enable peer-to-peer file transfer.
+        </p>
 
         <div class="upload-queue">
             <div class="upload-queue-item">

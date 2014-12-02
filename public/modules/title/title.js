@@ -45,7 +45,7 @@
 				else
 				{
 //					$rootScope.client.off('intervalCalculations', client_onIntervalCalculations);
-					$element.html('reep.io | peer to peer filesharing and streaming made easy');
+					$element.html('reep.io' + divider + 'peer-to-peer filesharing made easy');
 				}
 			});
 
