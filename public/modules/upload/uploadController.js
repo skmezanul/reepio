@@ -47,8 +47,8 @@
 
                 var $initializing = true;
 
-                $scope.$watchCollection('fileModel.files', function (newValue) {
-                    // wait for next digest cycle 
+                $scope.$watchCollection('fileModel.files', function (newValue, oldValue) {
+                    // wait for next digest cycle
                     if($initializing)
                     {
                         $timeout(function() {
@@ -57,16 +57,25 @@
                         return;
                     }
 
-                    var file = newValue[0];
+					if(newValue.length > oldValue.length)
+					{
+						// added
+						var file = newValue[0];
 
-                    uploadService.registerFile(file.rawFile).then(function(id){
-                        file.fileId = id.fileId;
-                        file.uniqueUrl = $location.absUrl() + 'd/' + id.peerId + id.fileId;
+						uploadService.registerFile(file.rawFile).then(function(id){
+							file.fileId = id.fileId;
+							file.uniqueUrl = $location.absUrl() + 'd/' + id.peerId + id.fileId;
 
-                        $analytics.eventTrack('urlCreated', { category: 'upload', label: $crypto.crc32(id.peerId + id.fileId) });
-                    }, function (err) {
-                        console.error(err);
-                    });
+							$analytics.eventTrack('urlCreated', { category: 'upload', label: $crypto.crc32(id.peerId + id.fileId) });
+						}, function (err) {
+							console.error(err);
+						});
+					}
+					else
+					{
+						// removed
+						uploadService.unregisterFile(oldValue[0].fileId);
+					}
                 });
 
                 $scope.getIsFileDropped = function(){
@@ -93,7 +102,7 @@
 
                     var modalInstance = $modal.open({
                         templateUrl: 'modules/upload/modals/password.html',
-                        controller: ['$scope', function($scope, password) {
+                        controller: ['$scope', function($scope) {
                             $scope.input = {};
                             $scope.input.password = file.password;
 
@@ -106,7 +115,7 @@
                             };
 
 							$scope.clear = function() {
-								$scope.$close('');
+								$scope.$dismiss('cancel');
 							}
                         }]
                     });
@@ -163,15 +172,16 @@
 						});
 					}),
 					$rootScope.$on('dataChannelClose', function(event, peerId, fileId){
-						$scope.$apply(function () {
-							for (var i = 0; i < $rootScope.fileModel.files.length; ++i) {
-								if($rootScope.fileModel.files[i].fileId == fileId){
-									delete $rootScope.fileModel.files[i].clients[peerId];
-								}
-
-								break;
+						for (var i = 0; i < $rootScope.fileModel.files.length; ++i) {
+							if($rootScope.fileModel.files[i].fileId == fileId){
+								delete $rootScope.fileModel.files[i].clients[peerId];
 							}
-						});
+
+							break;
+						}
+
+						if(!$scope.$$phase)
+							$scope.$apply(0);
 					})
 				];
 

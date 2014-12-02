@@ -61,34 +61,57 @@
              * @returns {Q.promise}
              */
             this.registerFile = function(file){
-                return peeringService.getPeer().then(function(peer){
-                    var fileId = this.__generateFileId();
+                return peeringService.getPeer()
+					.then(function(peer){
+						var fileId = this.__generateFileId();
 
-                    this.uploads[fileId] = {};
-                    this.uploads[fileId].file = file;
-                    this.uploads[fileId].connections = {};
-                    this.uploads[fileId].password = '';
+						this.uploads[fileId] = {};
+						this.uploads[fileId].file = file;
+						this.uploads[fileId].connections = {};
+						this.uploads[fileId].password = '';
 
-                    //Bind the connection event only once
-                    if(!peer._events.hasOwnProperty('connection')){
-                        peer.on('connection', function(connection){
-                            connection.on('data', function(data){
-                                var fn = this['__onPacket' + data.packet];
+						//Bind the connection event only once
+						if(!peer._events.hasOwnProperty('connection')){
+							peer.on('connection', function(connection){
+								connection.on('data', function(data){
+									if(this.hasOwnProperty('__onPacket' + data.packet) === false ||
+										typeof this['__onPacket' + data.packet] !== 'function')
+									{
+										connection.close();
+										return;
+									}
 
-                                if(typeof fn === 'function') {
-                                    fn = fn.bind(this);
-                                    fn(data, connection);
-                                }
-                            }.bind(this));
-                            connection.on('close', function(){
-                                $rootScope.$emit('dataChannelClose', connection.peer, fileId);
-                            });
-                        }.bind(this));
-                    }
+									var fn = this['__onPacket' + data.packet];
+									fn = fn.bind(this);
+									fn(data, connection);
 
-                    return {peerId: peer.id, fileId: fileId};
-                }.bind(this));
+								}.bind(this));
+
+								connection.on('close', function(){
+									$rootScope.$emit('dataChannelClose', connection.peer, fileId);
+								});
+							}.bind(this));
+						}
+
+						return {peerId: peer.id, fileId: fileId, peer: peer};
+					}.bind(this));
             };
+
+			/**
+			 *
+			 * @param fileId
+			 * @returns {Q.promise}
+			 */
+			this.unregisterFile = function (fileId) {
+				var upload = this.uploads[fileId];
+				if(typeof upload === 'undefined')
+					throw new Error('No file registered with id ' + fileId);
+
+				angular.forEach(upload.connections, function (conn, i) {
+					conn.__conn.close();
+					upload.connections[i] = null;
+				});
+			};
 
             /**
              * Generates a radom file id
@@ -103,7 +126,7 @@
                 }
 
                 return fileId;
-            }
+            };
 
             /**
              * Sets a password for a file
@@ -112,7 +135,7 @@
              */
             this.setPasswordForFile = function(fileId, password){
                 this.uploads[fileId].password = password;
-            }
+            };
 
             /**
              * Peer id and File id
@@ -135,7 +158,7 @@
                     peerId: id.substring(0, config.peerIdLength),
                     fileId: id.substring(config.peerIdLength, config.peerIdLength+config.fileIdLength)
                 }
-            }
+            };
 
             //Packets
 
@@ -147,7 +170,7 @@
              */
             this.__onPacketDownloadFinished = function(data, connection){
                 $rootScope.$emit('UploadFinished', connection.peer, data.fileId);
-            }
+            };
 
             /**
              * Authenticates a connection if the password is correct
@@ -156,7 +179,7 @@
              * @private
              */
             this.__onPacketAuthenticate = function(data, connection){
-                if(data.password == this.uploads[data.fileId].password){
+                if(data.password === this.uploads[data.fileId].password){
                     this.uploads[data.fileId].connections[connection.peer].isAuthenticated = true;
 
                     connection.send({
@@ -175,7 +198,7 @@
                         packet: 'IncorrectPassword'
                     });
                 }
-            }
+            };
 
             /**
              * Sends file information or a Authentication request if the file has a password
@@ -184,17 +207,15 @@
              * @private
              */
             this.__onPacketRequestFileInformation = function(data, connection){
-                if(this.uploads[data.fileId].connections[connection.peer] === undefined){
-                    this.uploads[data.fileId].connections[connection.peer] = {};
+				var upload = this.uploads[data.fileId];
 
-                    if(this.uploads[data.fileId].password.length > 0){
-                        this.uploads[data.fileId].connections[connection.peer].isAuthenticated = false;
-                    }else{
-                        this.uploads[data.fileId].connections[connection.peer].isAuthenticated = true;
-                    }
+                if(typeof upload.connections[connection.peer] === 'undefined'){
+                    upload.connections[connection.peer] = {};
+                    upload.connections[connection.peer].isAuthenticated = upload.password.length <= 0;
+					upload.connections[connection.peer].__conn = connection;
                 }
 
-                if(this.uploads[data.fileId].connections[connection.peer].isAuthenticated){
+                if(upload.connections[connection.peer].isAuthenticated){
                     connection.send({
                         packet: 'FileInformation',
                         fileId: data.fileId,
@@ -207,7 +228,7 @@
                         packet: 'AuthenticationRequest'
                     });
                 }
-            }
+            };
 
             /**
              * Send a file block
@@ -273,14 +294,15 @@
                 connectionData.startByte = data.chunkPosition * config.chunkSize;
                 connectionData.chunksToSend = config.chunksPerBlock;
 
+				var blob;
                 if(this.uploads[data.fileId].file.blobData !== undefined){
-                    var blob = this.uploads[data.fileId].file.blobData.slice(connectionData.startByte, (connectionData.startByte+config.chunkSize));
+                    blob = this.uploads[data.fileId].file.blobData.slice(connectionData.startByte, (connectionData.startByte+config.chunkSize));
                 }else{
-                    var blob = this.uploads[data.fileId].file.slice(connectionData.startByte, (connectionData.startByte+config.chunkSize));
+                    blob = this.uploads[data.fileId].file.slice(connectionData.startByte, (connectionData.startByte+config.chunkSize));
                 }
 
                 reader.readAsArrayBuffer(blob);
-            }
+            };
 
             /**
              * Emits UploadProgress event
