@@ -6590,8 +6590,7 @@ a.lock-file {
   #page-download,
   #page-download-authenticating,
   #page-download-connecting,
-  #page-download-error,
-  #page-upload-intro {
+  #page-download-error {
     margin-top: 15%;
     margin-bottom: 15%;
   }
@@ -6600,8 +6599,7 @@ a.lock-file {
   #page-download,
   #page-download-authenticating,
   #page-download-connecting,
-  #page-download-error,
-  #page-upload-intro {
+  #page-download-error {
     margin-top: 5%;
     margin-bottom: 5%;
   }
@@ -6610,8 +6608,7 @@ a.lock-file {
   #page-download,
   #page-download-authenticating,
   #page-download-connecting,
-  #page-download-error,
-  #page-upload-intro {
+  #page-download-error {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -6626,6 +6623,7 @@ a.lock-file {
   margin-top: 30px;
   padding-top: 40px;
   padding-bottom: 40px;
+  margin-bottom: 7%;
 }
 #page-upload-intro h1 {
   margin-top: 0;
@@ -6667,14 +6665,15 @@ a.lock-file {
     font-size: 14px;
   }
 }
-@media (max-height: 600px) {
+@media (max-height: 690px) {
   #page-upload-intro .lead {
     display: none;
   }
 }
-@media (max-height: 500px) {
+@media (max-height: 590px) {
   #page-upload-intro {
     padding: 15px 20px;
+    margin-bottom: 3%;
   }
   #page-upload-intro h1 {
     display: none;
@@ -6816,7 +6815,7 @@ a#page-incompatible a:hover {
     font-size: 30px;
   }
 }
-@media (max-height: 500px) {
+@media (max-height: 590px) {
   #btn-upload {
     margin-top: 20px;
   }
@@ -6908,7 +6907,7 @@ a#page-incompatible a:hover {
   top: 0;
   left: 0;
   text-align: center;
-  z-index: 1029;
+  z-index: 1028;
   cursor: pointer;
   font-size: 36px;
 }
@@ -7047,6 +7046,16 @@ a.tile:hover {
 @media (max-height: 500px) {
   #ads-footer {
     margin-top: 0;
+  }
+}
+#ads-footer-upload {
+  margin-top: 20px;
+  position: relative;
+  z-index: 1029;
+}
+@media (max-height: 590px) {
+  #ads-footer-upload {
+    margin-top: 10px;
   }
 }
 /** Media Queries

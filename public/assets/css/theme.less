@@ -376,8 +376,7 @@ a.lock-file {
 #page-download,
 #page-download-authenticating,
 #page-download-connecting,
-#page-download-error,
-#page-upload-intro {
+#page-download-error {
 	@media (min-width: @screen-sm-min) {
 		margin-top: 15%;
 		margin-bottom: 15%;
@@ -407,6 +406,7 @@ a.lock-file {
 	margin-top: 30px;
 	padding-top: 40px;
 	padding-bottom: 40px;
+	margin-bottom: 7%;
 
     h1 {
 		margin-top: 0;
@@ -452,14 +452,15 @@ a.lock-file {
 		}
 	}
 
-	@media (max-height: 600px) {
+	@media (max-height: 690px) {
 		.lead {
 			display: none
 		}
 	}
 
-	@media (max-height: 500px) {
+	@media (max-height: 590px) {
 		padding: 15px 20px;
+		margin-bottom: 3%;
 
 		h1 {
 			display: none
@@ -620,7 +621,7 @@ a.lock-file {
 		font-size: @font-size-h2;
 	}
 
-	@media (max-height: 500px) {
+	@media (max-height: 590px) {
 		margin-top: 20px;
 	}
 }
@@ -738,7 +739,7 @@ a.lock-file {
 	top: 0;
 	left: 0;
 	text-align: center;
-	z-index: @zindex-navbar-fixed - 1;
+	z-index: @zindex-navbar-fixed - 2;
 	cursor: pointer;
 	font-size: @font-size-h1;
 
@@ -900,6 +901,16 @@ a.lock-file {
 
 	@media (max-height: 500px) {
 		margin-top: 0;
+	}
+}
+
+#ads-footer-upload {
+	margin-top: 20px;
+	position: relative;
+	z-index: @zindex-navbar-fixed - 1;
+
+	@media (max-height: 590px) {
+		margin-top: 10px;
 	}
 }
 
