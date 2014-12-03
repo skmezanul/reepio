@@ -42,6 +42,7 @@
             this.intervalProgress = null;
 
             this.downloadState = 'connecting';
+			$rootScope.$emit('DownloadStateChanged', this.downloadState);
 
             this.requestFileInformation = function(id){
                 if(this.id !== null){
@@ -111,6 +112,7 @@
                 }
 
                 this.downloadState = 'inprogress';
+				$rootScope.$emit('DownloadStateChanged', this.downloadState);
 
                 this.intervalProgress = setInterval(this.progressCalculations.bind(this), 1000);
 
@@ -125,7 +127,7 @@
                         this.file.noFileSystem = true;
                         this.requestBlock(0);
 
-                        $rootScope.$emit('NoFileSystem',  this.file);
+                        $rootScope.$emit('NoFileSystem', this.file);
                     }.bind(this)
                 );
             };
@@ -134,7 +136,7 @@
 
                 this.file.bytesPerSecond = (this.file.downloadedChunksSinceLastCalculate * config.chunkSize);
 
-                $rootScope.$emit('intervalCalculations');
+                $rootScope.$emit('intervalCalculations', this.file.bytesPerSecond, this.file.progress);
 
                 this.connection.send({
                     packet: 'DownloadProgress',
@@ -178,6 +180,7 @@
                             this.progressCalculations();
                             this.file.fileSystemUrl = url;
                             this.downloadState = 'finished';
+							$rootScope.$emit('DownloadStateChanged', this.downloadState);
 
                             $rootScope.$emit('DownloadFinished');
 
@@ -210,6 +213,7 @@
                 this.file.totalChunksToReceive = Math.ceil(data.fileSize / config.chunkSize);
 
                 this.downloadState = 'ready';
+				$rootScope.$emit('DownloadStateChanged', this.downloadState);
 
                 storageService.checkIfFileExits(data.fileName, data.fileSize).then(
                     function(metaData){
@@ -220,6 +224,8 @@
                             storageService.getUrlForFinishedDownload(storageService.generateFileIdentifier(data.fileName, data.fileSize)).then(
                                 function(url){
                                     this.downloadState = 'finished';
+									$rootScope.$emit('DownloadStateChanged', this.downloadState);
+
                                     this.file.fileSystemUrl = url;
 
                                     $rootScope.$emit('FileInformation',  this.file);
@@ -237,6 +243,8 @@
 
             this.__onPacketAuthenticationRequest = function(data){
                 this.downloadState = 'authentication';
+				$rootScope.$emit('DownloadStateChanged', this.downloadState);
+
                 $rootScope.$emit('AuthenticationRequest');
             };
         }]);

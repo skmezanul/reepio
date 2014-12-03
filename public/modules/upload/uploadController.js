@@ -116,7 +116,7 @@
 
 							$scope.clear = function() {
 								$scope.$dismiss('cancel');
-							}
+							};
                         }]
                     });
 

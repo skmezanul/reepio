@@ -23,31 +23,42 @@
 	'use strict';
 
 	angular.module('titleController', ['fileFilters'])
-		.controller('TitleController', ['$rootScope', '$element', '$filter', function($rootScope, $element, $filter) {
+		.controller('TitleController', ['$scope', '$rootScope', '$element', '$filter', function($scope, $rootScope, $element, $filter) {
 
 			var divider = ' | ';
 
-			var client_onIntervalCalculations = function(bytesPerSecond, downloadProgress) {
+			var client_onIntervalCalculations = function(e, bytesPerSecond, downloadProgress) {
 				var speed = $filter('humanFileSize')(bytesPerSecond);
 
 				$element.html(Math.round(downloadProgress) + '%' + divider + speed + '/s' + divider + 'reep.io');
 			};
 
-			$rootScope.$watch('downloadState', function(newValue) {
-				if(typeof newValue === 'undefined')
-					return;
+			var removeIntervalCalculationsEvent;
 
-				if(newValue === 'inprogress')
-				{
-					// keep user updated on download progress
-					$rootScope.client.on('intervalCalculations', client_onIntervalCalculations);
-				}
-				else
-				{
-//					$rootScope.client.off('intervalCalculations', client_onIntervalCalculations);
-					$element.html('reep.io' + divider + 'peer-to-peer filesharing made easy');
-				}
-			});
+			var rootScopeEvents = [
+				$rootScope.$on('DownloadStateChanged', function(e, state) {
+					if(typeof e === 'undefined')
+						return;
 
+					if(state === 'inprogress')
+					{
+						// keep user updated on download progress
+						removeIntervalCalculationsEvent = $rootScope.$on('intervalCalculations', client_onIntervalCalculations);
+					}
+					else
+					{
+						if(typeof removeIntervalCalculationsEvent !== 'undefined')
+							removeIntervalCalculationsEvent();
+
+						$element.html('reep.io' + divider + 'peer-to-peer filesharing made easy');
+					}
+				})
+			];
+
+			$scope.$on('$destroy', function (e) {
+				angular.forEach(rootScopeEvents, function (offDelegate) {
+					offDelegate();
+				});
+			})
 		}]);
 })();

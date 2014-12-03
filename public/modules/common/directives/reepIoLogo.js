@@ -24,7 +24,7 @@
 	angular.module('reepIoLogoModule', [])
 		.directive('reepIoLogo', function () {
 			return {
-				restrict: 'E',
+				restrict: 'EA',
 				scope: {
 					width: '=?',
 					height: '=?'			

@@ -1,19 +1,18 @@
 <!doctype html>
-<html lang="en" ng-app="peertome">
+<html lang="en" data-ng-app="peertome">
 <head>
-    <meta charset="utf-8"> 
+    <meta charset="UTF-8">
     <base href="/"/>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/@@assetFingerprint@@theme.min.css"/>
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png" />
 
-    <title ng-controller="TitleController">reep.io | peer-to-peer filesharing made easy</title>
+    <title data-ng-controller="TitleController">reep.io | peer-to-peer filesharing made easy</title>
     <meta name="description" content="Transfer and stream files to other clients via browser peer-to-peer." />
 
     <meta name="DC.title" content="Peer-to-Peer file sharing in your browser #filesharing #p2p #privacy #WebRTC">
     <meta name="DC.creator" content="@IoReep">
-
-    <link rel="stylesheet" href="assets/css/@@assetFingerprint@@theme.min.css"/>
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="assets/images/reepio-cube.png">
@@ -22,33 +21,32 @@
     <script src="@@assetFingerprint@@app.min.js"></script>
 </head>
 <body>
-    <div class="loading-screen" ng-if=" ! running" ng-controller="LoadingCtrl">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6 col-sm-push-3">
-                    <div class="loading-screen-inner">
-                        reep<span class="text-primary">.io</span> is loading
+    <div class="container">
+        <div class="loading-screen" data-ng-if=" ! running" data-ng-controller="LoadingCtrl">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-push-3">
+                        <div class="loading-screen-inner">
+                            reep<span class="text-primary">.io</span> is loading
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="DialogController">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-                <div class="modal-body">
-                    <h4><strong ng-bind="title"></strong></h4>
-                    <p ng-bind="message"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-ng-controller="DialogController">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-body">
+                        <h4><strong data-ng-bind="title"></strong></h4>
+                        <p data-ng-bind="message"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
 
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">
             <div class="container">
@@ -59,7 +57,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" ng-href="#/">
+                    <a class="navbar-brand" data-ng-href="#/">
                         <reep-io-logo></reep-io-logo>
                         reep<span class="text-primary">.io</span>
                     </a>
@@ -67,14 +65,16 @@
 
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{active: getIsPageActive('/')}">
-                            <a ng-href="#/">Upload<span ng-show="fileModel.files.length > 0">
-                                    (<span ng-bind="fileModel.files.length"></span>)
+                        <li data-ng-class="{active: getIsPageActive('/')}">
+                            <a data-ng-href="#/">Upload<span data-ng-show="fileModel.files.length > 0">
+                                    (<span data-ng-bind="fileModel.files.length"></span>)
                                 </span></a>
                         </li>
-                        <li ng-class="{active: getIsPageActive('/about')}">
-                            <a ng-href="#/about">About</a>
+                        <li data-ng-class="{active: getIsPageActive('/about')}">
+                            <a data-ng-href="#/about">About</a>
                         </li>
+                        <li class="visible-xs"><a data-ng-href="#/imprint">Imprint</a></li>
+                        <li class="visible-xs"><a data-ng-href="#/privacy">Privacy</a></li>
                         <li>
                             <a href="https://twitter.com/IoReep" target="_blank">
                                 @IoReep
@@ -82,15 +82,17 @@
                         </li>
                         <li>
                             <p class="navbar-text">
-                                <iframe src="github-btn.html?user=KodeKraftwerk&repo=reep.io&type=watch&count=true"  allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+                                <iframe src="github-btn.html?user=KodeKraftwerk&amp;repo=reep.io&amp;type=watch&amp;count=true" style="overflow: hidden; border: 0; background: transparent" width="110" height="20"></iframe>
                             </p>
                         </li>
+                        <li class="nav-divider visible-xs"></li>
+                        <li class="visible-xs"><p class="navbar-text">&copy; <a data-ng-href="http://reep.io/">reep.io</a> 2014</p></li>
                     </ul>
 
-                    <div class="navbar-right col-sm-3" ng-hide="getIsPageActive('/d') || ! downloadId || downloadError">
-                        <a ng-href="/d/{{ downloadId }}">
+                    <div class="navbar-right col-sm-3" data-ng-hide="getIsPageActive('/d') || ! downloadId || downloadError">
+                        <a data-ng-href="#/d/{{ downloadId }}">
                             <div class="well well-sm">
-                                <span ng-bind="downloadService.file.name|maxLength:15"></span>
+                                <span data-ng-bind="downloadService.file.name|maxLength:15"></span>
                                 <p2m-progress-bar percent="downloadService.file.progress"></p2m-progress-bar>
                             </div>
                         </a>
@@ -98,26 +100,26 @@
                 </div>
             </div>
         </nav>
-
-        <ng-view onload="view_Load()" autoscroll="true"></ng-view>
-
-        <footer id="footer" class="hidden-xs">
-            <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <li><p class="navbar-text">&copy; <a ng-href="http://reep.io/">reep.io</a> 2014</p></li>
-                        <li><a ng-href="#/imprint">Imprint</a></li>
-                        <li><a ng-href="#/privacy">Privacy</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <div id="socialshareprivacy"></div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </footer>
     </div>
+
+    <div data-ng-view onload="view_Load()" autoscroll="true"></div>
+
+    <footer id="footer" class="hidden-xs">
+        <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><p class="navbar-text">&copy; <a data-ng-href="http://reep.io/">reep.io</a> 2014</p></li>
+                    <li><a data-ng-href="#/imprint">Imprint</a></li>
+                    <li><a data-ng-href="#/privacy">Privacy</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div id="socialshareprivacy"></div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </footer>
 
     <script type="text/javascript">
         var _paq = _paq || [];

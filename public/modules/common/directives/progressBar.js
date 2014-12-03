@@ -25,7 +25,7 @@
 	angular.module('progressBar', ['fileFilters'])
 		.directive('p2mProgressBar', function () {
 			return {
-				restrict: 'E',
+				restrict: 'EA',
 				scope: {
 					progress: '=percent', //progress in %
 					speed: '=?', //speed in bps

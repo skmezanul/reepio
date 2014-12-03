@@ -85,19 +85,20 @@
 				var rootscopeEvents = [
 					$rootScope.$on('DownloadFinished', function(e) {
 						$timeout(function(){
-							$scope.$apply(function(){});
+							$scope.$apply(function(){
 
-							if($scope.isImage)
-							{
-								// TODO ??
-							}
-							else
-							{
-								var downloadFrame = $('#download-frame');
-								if(downloadFrame.length > 0){
-									downloadFrame.get(0).click();
+								if($scope.isImage)
+								{
+									// TODO ??
 								}
-							}
+								else
+								{
+									var downloadFrame = $('#download-frame');
+									if(downloadFrame.length > 0){
+										downloadFrame.get(0).click();
+									}
+								}
+							});
 						});
 
 						$analytics.eventTrack('downloadFinished', { category: 'download', label: $scope.cryptoDownloadId });

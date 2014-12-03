@@ -3,32 +3,32 @@
 <!--</div>-->
 
 <div class="container">
-    <div class="col-md-10 col-md-push-1" ng-show="getIsDownloadVisible()">
+    <div class="col-md-10 col-md-push-1" data-ng-show="getIsDownloadVisible()">
         <div class="row">
             <div class="col-xs-12">
-                <div id="page-download" ng-class="{ 'page-download-streaming': isStreamingRunning, 'page-download-image': isImage }">
+                <div id="page-download" data-ng-class="{ 'page-download-streaming': isStreamingRunning, 'page-download-image': isImage }">
 
                     <p class="lead">
                         This is a peer-to-peer download. You will download the file below directly from another peer. <a
-                            ng-href="#/about">More Information</a>
+                            data-ng-href="#/about">More Information</a>
                     </p>
 
-                    <div ng-if="isImage" class="page-download-image-preview" ng-cloak>
+                    <div data-ng-if="isImage" class="page-download-image-preview" data-ng-cloak>
                         <div class="col-sm-10 col-sm-push-1">
-                            <img reepio-loading-indicator reepio-loading-indicator-message="Loading image preview..."
-                            alt="{{ downloadService.file.name }}" title="{{ downloadService.file.name }}" ng-src="{{fileSystemUrl}}" class="img img-responsive" />
+                            <img data-reepio-loading-indicator data-reepio-loading-indicator-message="Loading image preview..."
+                            data-ng-attr-alt="{{ downloadService.file.name }}" data-ng-attr-title="{{ downloadService.file.name }}" data-ng-src="{{fileSystemUrl}}" class="img img-responsive" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="well">
                         <!-- not enough filesystem space -->
-                        <div class="row" ng-show="downloadService.file.noFileSystem && downloadService.file.size > 524288000">
+                        <div class="row" data-ng-show="downloadService.file.noFileSystem && downloadService.file.size > 524288000">
                             <div class="col-sm-12">
                                 <div class="well tile">
                                     <div class="row">
                                         <div class="col-sm-2 text-center">
-                                            <i class="fa fa-warning" style="font-size: 64px;"></i>
+                                            <span class="fa fa-warning" style="font-size: 64px;"></span>
                                         </div>
                                         <div class="col-sm-10">
                                             <h3 style="margin-top: 0;">Not enough disk space</h3>
@@ -44,35 +44,35 @@
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <p2m-file-icon file-type="downloadService.file.type" class="file-icon-small"></p2m-file-icon>
+                                <div data-p2m-file-icon data-file-type="downloadService.file.type" class="file-icon-small"></div>
                             </div>
 
                             <div class="col-xs-12 col-sm-10">
                                 <div class="file-name">
-                                    <h4 title="{{ downloadService.file.name }}" class="pull-left"> {{ downloadService.file.name }} </h4>
-                                    <span class="pull-right text-muted hidden-xs">{{ downloadService.file.size|humanFileSize }}</span>
+                                    <h4 data-ng-attr-title="{{ downloadService.file.name }}" class="pull-left" data-ng-bind="downloadService.file.name"></h4>
+                                    <span class="pull-right text-muted hidden-xs" data-ng-bind="downloadService.file.size|humanFileSize"></span>
                                 </div>
                                 <div class="clearfix"></div>
 
-                                <p2m-progress-bar percent="downloadService.file.progress" speed="downloadService.file.bytesPerSecond" show-progress="true"></p2m-progress-bar>
+                                <div data-p2m-progress-bar data-percent="downloadService.file.progress" data-speed="downloadService.file.bytesPerSecond" data-show-progress="true"></div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="btn-group-justified">
-                                    <a class="btn btn-lg btn-primary" ng-click="downloadFile()" ng-show="downloadService.downloadState == 'ready' && isStreamingRunning != true">
+                                    <a class="btn btn-lg btn-primary" data-ng-click="downloadFile()" data-ng-show="downloadService.downloadState == 'ready' && isStreamingRunning != true">
                                         <span class="fa fa-download"></span> Download
                                     </a>
 
-                                    <a class="btn btn-lg btn-primary" ng-click="startStream()" ng-if="downloadService.downloadState == 'ready' && isStreamAble && isStreamingRunning == false">
+                                    <a class="btn btn-lg btn-primary" data-ng-click="startStream()" data-ng-if="downloadService.downloadState == 'ready' && isStreamAble && isStreamingRunning == false">
                                         <span class="fa fa-play"></span> Stream
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <div ng-show="downloadService.downloadState == 'inprogress' && isStreamingRunning == false">
+                        <div data-ng-show="downloadService.downloadState == 'inprogress' && isStreamingRunning == false">
                             <div class="btn-group btn-group-justified">
                                 <a class="btn btn-lg btn-primary disabled col-xs-12">
                                     <span class="fa fa-refresh fa-spin"></span> Downloading...
@@ -80,24 +80,24 @@
                             </div>
                         </div>
 
-                        <a class="btn btn-lg btn-primary col-xs-12" ng-click="resumeUpload()" ng-show="downloadService.downloadState == 'paused'">
+                        <a class="btn btn-lg btn-primary col-xs-12" data-ng-click="resumeUpload()" data-ng-show="downloadService.downloadState == 'paused'">
                             <span class="fa fa-play"></span> Resume download
                         </a>
 
 
-                        <a class="btn btn-lg btn-primary col-xs-12" ng-click="saveFile()" ng-show="downloadService.downloadState == 'finished'">
+                        <a class="btn btn-lg btn-primary col-xs-12" data-ng-click="saveFile()" data-ng-show="downloadService.downloadState == 'finished'">
                             <i class="fa fa-download"></i> Save to disk
                         </a>
                         <div class="clearfix"></div>
                     </div>
-                    <a id="download-frame" download="{{ file.name }}" href="{{ downloadService.file.fileSystemUrl }}" style="display: none"></a>
+                    <a id="download-frame" data-ng-attr-download="{{ file.name }}" data-ng-attr-href="{{ downloadService.file.fileSystemUrl }}" style="display: none"></a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- authentication -->
-    <div class="row" ng-show="downloadService.downloadState == 'authentication'">
+    <div class="row" data-ng-show="downloadService.downloadState == 'authentication'">
         <div class="col-md-10 col-md-push-1" id="page-download-authenticating">
             <div class="well">
                 <div class="row">
@@ -111,18 +111,20 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <form ng-submit="doAuthentication()">
+                        <form data-ng-submit="doAuthentication()">
                             <div class="input-group input-group-lg">
-                                <input type="password" class="form-control text-center" ng-model="password" placeholder="Password">
+                                <input type="password" class="form-control text-center" data-ng-model="password" placeholder="Password">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" ng-click="doAuthentication()">
+                                    <button class="btn btn-default" type="button" data-ng-click="doAuthentication()">
                                         <span class="fa fa-unlock"></span> <span class="hidden-xs">Unlock</span>
                                     </button>
                                 </span>
                             </div>
                         </form>
 
-                        <alert type="danger" ng-show="authenticationError">{{ authenticationError }}</alert>
+                        <div data-ng-if="authenticationError">
+                            <alert type="danger"><span data-ng-bind="authenticationError"></span></alert>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,7 +132,7 @@
     </div>
 
     <!-- Connecting... -->
-    <div class="col-sm-10 col-sm-push-1" ng-show="downloadService.downloadState == 'connecting' && ! downloadError" id="page-download-connecting">
+    <div class="col-sm-10 col-sm-push-1" data-ng-show="downloadService.downloadState == 'connecting' && ! downloadError" id="page-download-connecting">
         <div class="text-center">
             <span class="fa fa-spin fa-gear" style="font-size: 32px"></span>
             <span class="fa fa-spin fa-gear" style="font-size: 64px"></span>
@@ -139,10 +141,10 @@
         </div>
     </div>
 
-    <div class="text-center" id="page-download-error" ng-show="downloadError">
+    <div class="text-center" id="page-download-error" data-ng-show="downloadError">
         <span class="fa fa-warning" style="font-size: 64px;"></span>
-        <h3>{{ downloadError }}</h3>
-        <p ng-show="downloadErrorDescription">{{ downloadErrorDescription }}</p>
+        <h3 data-ng-bind="downloadError"></h3>
+        <p data-ng-show="downloadErrorDescription" data-ng-bind="downloadErrorDescription"></p>
     </div>
 </div>
 

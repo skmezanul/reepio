@@ -25,9 +25,9 @@
 	angular.module('static')
 		.directive('reepioSlidingFile', ['$document', function ($document) {
 			return {
-				restrict: 'E',
-				template: 	'<div class="sliding-file" ng-class="{ \'is-sliding\': scrollTop > .05 && scrollTop < 0.95, \'is-static\': scrollTop >= 1 }">' +
-								'<i class="fa fa-file"></i>' +
+				restrict: 'EA',
+				template: 	'<div class="sliding-file" data-ng-class="{ \'is-sliding\': scrollTop > .05 && scrollTop < 0.95, \'is-static\': scrollTop >= 1 }">' +
+								'<span class="fa fa-file"></span>' +
 							'</div>',
 				scope: {
 					scrollMax: '=?'					

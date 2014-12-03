@@ -61,7 +61,7 @@
 	angular.module('fileIcon', [])
 		.directive('p2mFileIcon', function () {
 			return {
-				restrict: 'E',
+				restrict: 'EA',
 				scope: {
 					fileType: '=',
 					'class': '@?class'
