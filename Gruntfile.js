@@ -9,11 +9,11 @@ module.exports = function(grunt) {
 			angular: {
 				src: [
 					'public/assets/js/jquery-1.11.1.js',
-					'public/assets/js/angular-1.2.21/angular.js',
-					'public/assets/js/angular-1.2.21/angular-animate.js',
-					'public/assets/js/angular-1.2.21/angular-route.js',
-					'public/assets/js/angulartics-0.16.1/src/angulartics.js',
-					'public/assets/js/angulartics-0.16.1/src/angulartics-piwik.js'
+					'public/assets/js/angularjs/angular.js',
+					'public/assets/js/angularjs/angular-animate.js',
+					'public/assets/js/angularjs/angular-route.js',
+					'public/assets/js/angulartics/angulartics.js',
+					'public/assets/js/angulartics/angulartics-piwik.js'
 				],
 				dest: 'build/lib/angular.js'
 			},
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 					'public/assets/js/three.js',
 					'public/assets/js/peer.js',
 					'public/assets/js/jquery.socialshareprivacy.js',
-					'public/assets/js/paste.js/paste.js',
+					'public/assets/js/paste.js/paste.js'
 				],
 				dest: 'build/lib/thirdparty.js'
 			},

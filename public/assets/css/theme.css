@@ -6713,6 +6713,7 @@ a.lock-file {
   color: #000;
   width: 140px;
   height: 140px;
+  margin-bottom: 40px;
   border-radius: 50%;
   text-align: center;
   color: #fff;
@@ -6998,6 +6999,7 @@ a.tile:hover {
   background: #0d0d0d url("../images/body-bg.png") top no-repeat;
   z-index: 1031;
   top: 0;
+  left: 0;
 }
 .loading-screen .loading-screen-inner {
   text-align: center;

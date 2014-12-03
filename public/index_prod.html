@@ -58,7 +58,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" data-ng-href="#/">
-                        <reep-io-logo></reep-io-logo>
+                        <div data-reep-io-logo></div>
                         reep<span class="text-primary">.io</span>
                     </a>
                 </div>
@@ -93,7 +93,7 @@
                         <a data-ng-href="#/d/{{ downloadId }}">
                             <div class="well well-sm">
                                 <span data-ng-bind="downloadService.file.name|maxLength:15"></span>
-                                <p2m-progress-bar percent="downloadService.file.progress"></p2m-progress-bar>
+                                <div data-p2m-progress-bar data-percent="downloadService.file.progress"></div>
                             </div>
                         </a>
                     </div>
@@ -102,7 +102,7 @@
         </nav>
     </div>
 
-    <div data-ng-view onload="view_Load()" autoscroll="true"></div>
+    <div data-ng-view onload="view_Load()" data-autoscroll="true"></div>
 
     <footer id="footer" class="hidden-xs">
         <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
@@ -128,7 +128,7 @@
             _paq.push(['setTrackerUrl', u+'piwik.php']);
             _paq.push(['setSiteId', 7]);
             var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-            g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            g.defer=true; g.async=true; g.src=u+'js/'; s.parentNode.insertBefore(g,s);
         })();
     </script>
 </body>
