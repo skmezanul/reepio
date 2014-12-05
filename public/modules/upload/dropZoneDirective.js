@@ -25,7 +25,7 @@
 	angular.module('upload')
 		.directive('p2mDropZone', ['$animate', '$document', function ($animate, $document) {
 
-            var checkIfFolder = function(scope, files, el){
+            function checkIfFolder(scope, files, el){
                 var length = (files.length < scope.maxFiles) ? files.length : scope.maxFiles;
 
                 for(var i = 0; i < length; i++)
@@ -35,9 +35,9 @@
                         addFile(scope, file, el);
                     }else{
                         var reader = new FileReader();
-                        reader.onload = function () {
+                        reader.onload = function (file) {
                             addFile(scope, file, el);
-                        };
+						}.bind(null, file);
                         reader.onerror = function(){
                             if(scope.files.length > 0)
                                 $animate.addClass(el, 'ng-hide');
@@ -47,8 +47,8 @@
                 }
             }
 
-			var addFile = function (scope, file, el) {
-                var file = {
+			function addFile(scope, file, el) {
+                file = {
                     rawFile: file,
                     fileId: null,
                     clients: {},
@@ -62,9 +62,10 @@
                 {
                     scope.files.pop();
                 }
+
                 $animate.addClass(el, 'ng-hide');
                 scope.$apply();
-			};
+			}
 
 			return {
 				restrict: 'A',

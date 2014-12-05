@@ -20,15 +20,15 @@
             </div>
         </section>
 
-        <div id="drop-box" p2m-drop-zone max-files="8" files="fileModel.files" data-ng-animate data-ng-hide="getIsFileDropped()" data-ng-class="{ 'hasFiles': fileModel.files.length > 0}">
-            <div data-ng-show="getIsFileDropped()">
+        <div id="drop-box" class="ng-hide" data-p2m-drop-zone data-max-files="8" data-files="fileModel.files" data-ng-animate data-ng-class="{ 'hasFiles': fileModel.files.length > 0}">
+            <div>
                 <span class="glyphicon glyphicon-plus"></span>
                 Drop files here...
             </div>
         </div>
 
         <div data-ng-show="getIsFileDropped()">
-            <p class="lead">
+            <p class="lead ui-widget-shadow">
                 Copy the link below and send it to a friend to start a peer-to-peer file transfer. Do not close
                 this browser tab to enable peer-to-peer file transfer.
             </p>
@@ -96,7 +96,7 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-8 col-sm-push-2">
+            <div class="col-sm-12">
                 <button class="btn btn-primary btn-lg col-sm-12" data-ng-click="addFile()" id="btn-upload">
                     <i class="glyphicon glyphicon-plus"></i>
                     Add or drop files...
@@ -107,23 +107,24 @@
         </div>
     </div>
 </div>
-<div id="ads-footer-upload">
-<div class="container">
-    <div class="row">
-        <div class="well well-sm">
-            <div class="text-center">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- reep.io wide -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-6890068258895036"
-                     data-ad-slot="1776785037"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+
+<nav id="ads-footer-upload">
+    <div class="container">
+        <div class="row">
+            <div class="well well-sm">
+                <div class="text-center">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- reep.io wide -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-6890068258895036"
+                         data-ad-slot="1776785037"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+</nav>

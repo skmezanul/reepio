@@ -739,9 +739,10 @@ a.lock-file {
 	top: 0;
 	left: 0;
 	text-align: center;
-	z-index: @zindex-navbar-fixed - 2;
+	z-index: @zindex-navbar-fixed - 1;
 	cursor: pointer;
 	font-size: @font-size-h1;
+	background: rgba(red(@body-bg), green(@body-bg), blue(@body-bg), 0.9);
 
 	> div {
 		position: absolute;
@@ -758,8 +759,6 @@ a.lock-file {
     	&, & * {
     		pointer-events:none;
     	}
-
-		background: rgba(red(@body-bg), green(@body-bg), blue(@body-bg), 0.8);
 	}
 }
 
@@ -905,12 +904,15 @@ a.lock-file {
 }
 
 #ads-footer-upload {
-	margin-top: 20px;
-	position: relative;
 	z-index: @zindex-navbar-fixed - 1;
+	position: relative;
 
 	@media (max-height: 590px) {
 		margin-top: 10px;
+	}
+
+	@media (min-height: 820px) {
+		margin-top: 7%;
 	}
 }
 

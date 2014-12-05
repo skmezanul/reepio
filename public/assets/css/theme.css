@@ -6907,9 +6907,10 @@ a#page-incompatible a:hover {
   top: 0;
   left: 0;
   text-align: center;
-  z-index: 1028;
+  z-index: 1029;
   cursor: pointer;
   font-size: 36px;
+  background: rgba(13, 13, 13, 0.9);
 }
 #drop-box > div {
   position: absolute;
@@ -6920,9 +6921,6 @@ a#page-incompatible a:hover {
   margin-top: -50px;
   font-size: 64px;
   line-height: 56px;
-}
-#drop-box.hasFiles {
-  background: rgba(13, 13, 13, 0.8);
 }
 #drop-box.hasFiles,
 #drop-box.hasFiles * {
@@ -7049,13 +7047,17 @@ a.tile:hover {
   }
 }
 #ads-footer-upload {
-  margin-top: 20px;
-  position: relative;
   z-index: 1029;
+  position: relative;
 }
 @media (max-height: 590px) {
   #ads-footer-upload {
     margin-top: 10px;
+  }
+}
+@media (min-height: 820px) {
+  #ads-footer-upload {
+    margin-top: 7%;
   }
 }
 /** Media Queries
