@@ -36,76 +36,75 @@
 		'reepIoLogoModule'
 	];
 
-	var app = angular.module('peertome', use, ['$compileProvider', function ($compileProvider) {
+	angular.module('peertome', use, ['$compileProvider', function ($compileProvider) {
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|filesystem|blob):/);
 		$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|filesystem|blob):|data:image\//);
-	}]);
+	}])
+		.constant('appEnv', (typeof window['app_env'] !== 'undefined' ? window['app_env'] : 'prod'))
+		.config(['$routeProvider', '$locationProvider', '$analyticsProvider', 'appEnv', function ($routeProvider, $locationProvider, $analyticsProvider, appEnv) {
+			$routeProvider
+				.otherwise({
+					templateUrl: 'modules/static/page-404.html',
+					controller: 'StaticCtrl'
+				});
 
-	app.constant('appEnv', (typeof window['app_env'] !== 'undefined' ? window['app_env'] : 'prod'));
-			
-	app.config(['$routeProvider', '$locationProvider', '$analyticsProvider', 'appEnv', function ($routeProvider, $locationProvider, $analyticsProvider, appEnv) {
-		$routeProvider
-			.otherwise({
-				templateUrl: 'modules/static/page-404.html',
-				controller: 'StaticCtrl'
-			});
-
-		$locationProvider.html5Mode(appEnv !== 'dev');
-  		$analyticsProvider.virtualPageviews(false);
-	}]);
-	
-	app.run(['$rootScope', '$location', '$route', '$document', 'appEnv',
+			$locationProvider.html5Mode(appEnv !== 'dev');
+			$analyticsProvider.virtualPageviews(false);
+		}])
+		.value('clipboardSwf', '/assets/js/reepio-copy-to-clipboard/bin/CopyToClipboard.swf')
+		.value('clipboardExpressInstallSwf', '/assets/js/reepio-copy-to-clipboard/bin/expressInstall.swf')
+		.run(['$rootScope', '$location', '$route', '$document', 'appEnv',
 		function ($rootScope, $location, $route, $document, appEnv) {
-		$rootScope.appEnv = appEnv;
-		
-		angular.element('#navbar-collapse-1').collapse({
-		  	toggle: false
-		});
+			$rootScope.appEnv = appEnv;
 
-		// init heise social share privacy plugin.
-		if($('#socialshareprivacy').length > 0){
-			$('#socialshareprivacy').socialSharePrivacy({
-				services : {
-					facebook : {
-						'perma_option' : 'off',
-      					'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_facebook_en.png',
-      					'img' : 'assets/js/socialshareprivacy/images/facebook.png',
-      					'sharer': {
-      						'status': 	'on',
-      						'dummy_img':'assets/js/socialshareprivacy/images/dummy_facebook_share_en.png',
-      						'img' : 	'assets/js/socialshareprivacy/images/facebook_share_en.png'
-      					}
-					}, 
-					twitter : {
-						'perma_option' : 'off',
-      					'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_twitter.png',
-      					'img' : 'assets/js/socialshareprivacy/images/twitter.png'
-					}, 
-					gplus : {
-						'perma_option' : 'off',
-      					'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_gplus.png',
-      					'img' : 'assets/js/socialshareprivacy/images/gplus.png'
-					}
-				},
-				'css_path'  : '',
-				'lang_path' : 'assets/js/socialshareprivacy/lang/',
-				'language'  : 'en',
-				'uri'		: 'https://reep.io',
-				'perma_orientation' : 'top'
+			angular.element('#navbar-collapse-1').collapse({
+				toggle: false
 			});
-		}
 
-		$rootScope.view_Load = function() {
-			angular.element('#navbar-collapse-1').collapse('hide');
-		};
+			// init heise social share privacy plugin.
+			if(angular.element('#socialshareprivacy').length > 0){
+				$('#socialshareprivacy').socialSharePrivacy({
+					services : {
+						facebook : {
+							'perma_option' : 'off',
+							'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_facebook_en.png',
+							'img' : 'assets/js/socialshareprivacy/images/facebook.png',
+							'sharer': {
+								'status': 	'on',
+								'dummy_img':'assets/js/socialshareprivacy/images/dummy_facebook_share_en.png',
+								'img' : 	'assets/js/socialshareprivacy/images/facebook_share_en.png'
+							}
+						},
+						twitter : {
+							'perma_option' : 'off',
+							'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_twitter.png',
+							'img' : 'assets/js/socialshareprivacy/images/twitter.png'
+						},
+						gplus : {
+							'perma_option' : 'off',
+							'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_gplus.png',
+							'img' : 'assets/js/socialshareprivacy/images/gplus.png'
+						}
+					},
+					'css_path'  : '',
+					'lang_path' : 'assets/js/socialshareprivacy/lang/',
+					'language'  : 'en',
+					'uri'		: 'https://reep.io',
+					'perma_orientation' : 'top'
+				});
+			}
 
-		$rootScope.getIsPageActive = function (page) {
-			if(page === '/d')
-				return $location.path() === (page + '/' + $rootScope.downloadId);
+			$rootScope.view_Load = function() {
+				angular.element('#navbar-collapse-1').collapse('hide');
+			};
 
-			return $location.path() === page;
-		};
+			$rootScope.getIsPageActive = function (page) {
+				if(page === '/d')
+					return $location.path() === (page + '/' + $rootScope.downloadId);
 
-		$rootScope.running = true;
+				return $location.path() === page;
+			};
+
+			$rootScope.running = true;
 	}]);	
 })();

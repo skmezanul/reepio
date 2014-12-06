@@ -728,6 +728,13 @@ a.lock-file {
 	.form-group {
 		margin-bottom: 5px;
 	}
+
+	.btn-clipboard {
+		float: right;
+		margin-top: -(@btn-clipboard-height + 2);
+		margin-right: 1px;
+		background: @input-bg;
+	}
 }
 
 /** "Drop File here" Area
@@ -759,6 +766,28 @@ a.lock-file {
     	&, & * {
     		pointer-events:none;
     	}
+	}
+}
+
+/** Clipboard styles
+---------------------------- */
+@btn-clipboard-width: 70px;
+@btn-clipboard-height: 30px;
+
+.btn-clipboard {
+	width: @btn-clipboard-width;
+	height: @btn-clipboard-height;
+
+	&:hover {
+		color: @brand-primary
+	}
+
+	.btn-clipboard-label {
+		margin-top: -@btn-clipboard-height;
+		position: absolute;
+		margin-left: 10px;
+		pointer-events:none;
+		padding-right: 20px;
 	}
 }
 

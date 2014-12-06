@@ -6898,6 +6898,12 @@ a#page-incompatible a:hover {
 .upload-queue .form-group {
   margin-bottom: 5px;
 }
+.upload-queue .btn-clipboard {
+  float: right;
+  margin-top: -32px;
+  margin-right: 1px;
+  background: #0d0d0d;
+}
 /** "Drop File here" Area
 ---------------------------- */
 #drop-box {
@@ -6925,6 +6931,22 @@ a#page-incompatible a:hover {
 #drop-box.hasFiles,
 #drop-box.hasFiles * {
   pointer-events: none;
+}
+/** Clipboard styles
+---------------------------- */
+.btn-clipboard {
+  width: 70px;
+  height: 30px;
+}
+.btn-clipboard:hover {
+  color: #bd2222;
+}
+.btn-clipboard .btn-clipboard-label {
+  margin-top: -30px;
+  position: absolute;
+  margin-left: 10px;
+  pointer-events: none;
+  padding-right: 20px;
 }
 /** Progress Bar
 ---------------------------- */

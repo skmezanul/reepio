@@ -53,6 +53,9 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <input type="text" class="form-control" placeholder="Generating Url..." data-ng-value="file.uniqueUrl" onclick="select()" readonly>
+                                <div data-reepio-clipboard data-on-copied="onClipboardCopied" data-clipboard-data="file.uniqueUrl">
+                                    <div class="btn-clipboard-label" data-toggle="clipboard-tooltip" data-placement="auto right" title="Copied to Clipboard!"><span class="fa fa-clipboard"></span> Copy</div>
+                                </div>
                             </div>
 
                             <ul class="list-inline text-muted">
