@@ -64,8 +64,6 @@
 //                    $scope.isStreamingRunning = false;
 
                     downloadService.startDownload();
-
-                    $analytics.eventTrack('startDownload', {  category: 'download', label: $rootScope.cryptoDownloadId, value: Math.round(downloadService.file.size/1024) });
                 };
 
                 $scope.getIsDownloadVisible = function () {
@@ -101,7 +99,7 @@
 							});
 						});
 
-						$analytics.eventTrack('downloadFinished', { category: 'download', label: $scope.cryptoDownloadId });
+                        $analytics.eventTrack('startDownload', {  category: 'download', value: Math.round(downloadService.file.size/1024) });
 					}),
 					$rootScope.$on('FileInformation', function(event, data) {
 						$timeout(function(){
