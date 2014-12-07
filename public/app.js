@@ -51,8 +51,8 @@
 			$locationProvider.html5Mode(appEnv !== 'dev');
 			$analyticsProvider.virtualPageviews(false);
 		}])
-		.value('clipboardSwf', '/assets/js/reepio-copy-to-clipboard/bin/CopyToClipboard.swf')
-		.value('clipboardExpressInstallSwf', '/assets/js/reepio-copy-to-clipboard/bin/expressInstall.swf')
+		.value('clipboardSwf', '/assets/bower_components/reepio-paste-to-clipboard/bin/CopyToClipboard.swf')
+		.value('clipboardExpressInstallSwf', '/assets/bower_components/reepio-paste-to-clipboard/bin/expressInstall.swf')
 		.run(['$rootScope', '$location', '$route', '$document', 'appEnv',
 		function ($rootScope, $location, $route, $document, appEnv) {
 			$rootScope.appEnv = appEnv;

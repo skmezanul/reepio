@@ -28,7 +28,7 @@
         </div>
 
         <div data-ng-show="getIsFileDropped()">
-            <p class="lead ui-widget-shadow">
+            <p class="lead">
                 Copy the link below and send it to a friend to start a peer-to-peer file transfer. Do not close
                 this browser tab to enable peer-to-peer file transfer.
             </p>
@@ -36,8 +36,8 @@
             <div class="upload-queue">
                 <div class="upload-queue-item" data-ng-repeat="file in fileModel.files" data-ng-animate>
                     <div class="media">
-                        <div class="pull-left">
-                            <div class="media-object bg-primary">
+                        <div class="media-left">
+                            <div class="bg-primary">
                                 <div data-p2m-file-icon data-file-type="file.rawFile.type" class="file-icon-small"></div>
                             </div>
                         </div>
@@ -52,9 +52,17 @@
                                     <h4 data-ng-attr-title="{{ file.rawFile.name }}" class="pull-left" data-ng-bind="file.rawFile.name"></h4>
                                 </div>
                                 <div class="clearfix"></div>
+
                                 <input type="text" class="form-control" placeholder="Generating Url..." data-ng-value="file.uniqueUrl" onclick="select()" readonly>
+
                                 <div data-reepio-clipboard data-on-copied="onClipboardCopied" data-clipboard-data="file.uniqueUrl">
-                                    <div class="btn-clipboard-label" data-toggle="clipboard-tooltip" data-placement="auto right" title="Copied to Clipboard!"><span class="fa fa-clipboard"></span> Copy</div>
+                                    <div class="btn-clipboard-label"
+                                         data-toggle="clipboard-tooltip"
+                                         data-placement="bottom"
+                                         data-container=".media-body"
+                                         title="Copied to Clipboard!">
+                                        <span class="fa fa-clipboard"></span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -62,7 +70,7 @@
                                 <li>
                                     <span data-ng-bind="file.rawFile.size|humanFileSize"></span>
                                 </li>
-                                <li>
+                                <li data-ng-attr-title="Downloaded {{ file.totalDownloads }} times">
                                     <span class="fa fa-download"></span>
                                     <span data-ng-bind="file.totalDownloads"></span>x
                                 </li>

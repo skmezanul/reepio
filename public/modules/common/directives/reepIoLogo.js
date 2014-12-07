@@ -84,7 +84,14 @@
 
 						scene.add( light );
 
-						renderer = new THREE.CanvasRenderer();
+						if (window.WebGLRenderingContext)
+							renderer = new THREE.WebGLRenderer({
+								antialias: true,
+								precision: 'lowp'
+							});
+						else
+							renderer = new THREE.CanvasRenderer();
+
 						renderer.setClearColor( 0xffffff );
 						renderer.setSize( width, height );
 

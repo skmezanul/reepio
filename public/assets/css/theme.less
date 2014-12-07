@@ -19,7 +19,7 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-@import "../../../node_modules/bootstrap/less/bootstrap";
+@import "../bower_components/bootstrap/less/bootstrap";
 
 @body-bg: #0d0d0d;
 
@@ -672,6 +672,10 @@ a.lock-file {
 		}
 	}
 
+	.media-body {
+		width: 100%;
+	}
+
 	ul {
 		margin: 0;
 		padding: 0;
@@ -731,9 +735,10 @@ a.lock-file {
 
 	.btn-clipboard {
 		float: right;
-		margin-top: -(@btn-clipboard-height + 2);
-		margin-right: 1px;
+		position: relative;
 		background: @input-bg;
+		margin-top: -(@btn-clipboard-height + 5);
+		margin-right: 5px;
 	}
 }
 
@@ -771,25 +776,35 @@ a.lock-file {
 
 /** Clipboard styles
 ---------------------------- */
-@btn-clipboard-width: 70px;
-@btn-clipboard-height: 30px;
+@btn-clipboard-width: 32px;
+@btn-clipboard-height: 26px;
 
 .btn-clipboard {
-	width: @btn-clipboard-width;
-	height: @btn-clipboard-height;
 
-	&:hover {
-		color: @brand-primary
+	&, .btn-clipboard-label {
+		width: @btn-clipboard-width;
+		height: @btn-clipboard-height;
 	}
 
 	.btn-clipboard-label {
-		margin-top: -@btn-clipboard-height;
+		display: block;
 		position: absolute;
-		margin-left: 10px;
-		pointer-events:none;
-		padding-right: 20px;
+		pointer-events: none;
+		margin-top: -(@btn-clipboard-height + 4);
+
+		background: lighten(@input-bg, 10%);
+		border-radius: 3px;
+		padding: 4px 10px;
+	}
+
+	&:hover .btn-clipboard-label {
+		background: lighten(@input-bg, 20%);
 	}
 }
+
+
+/** Tooltips
+---------------------------- */
 
 
 /** Progress Bar

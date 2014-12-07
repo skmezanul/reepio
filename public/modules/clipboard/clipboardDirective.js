@@ -5,17 +5,16 @@
 angular.module('reepioClipboardDirective', [])
 	.value('clipboardSwf', 'CopyToClipboard.swf')
 	.value('clipboardExpressInstallSwf', 'expressInstall.swf')
-	.factory('clipboardDirectiveIdService', [function () {
-		var id = 0;
-
+	.service('clipboardDirectiveIdService', [function () {
 		return {
+			__id: 0,
 			getUniqueId: function () {
-				return 'clipboard-' + id++;
+				return 'clipboard-' + (this.__id++);
 			}
 		};
 	}])
-	.directive('reepioClipboard', ['converterService', 'clipboardSwf', 'clipboardExpressInstallSwf', 'clipboardDirectiveIdService',
-		function (converterService, clipboardSwf, clipboardExpressInstallSwf, clipboardDirectiveIdService) {
+	.directive('reepioClipboard', ['$compile', 'clipboardDirectiveIdService', 'converterService', 'clipboardSwf', 'clipboardExpressInstallSwf',
+		function ($compile, clipboardDirectiveIdService, converterService, clipboardSwf, clipboardExpressInstallSwf) {
 
 		var params = {
 			menu: "false",
@@ -26,6 +25,23 @@ angular.module('reepioClipboardDirective', [])
 			wmode: "transparent"
 		};
 
+		// gets called by flash ExternalInterface
+		window.clipboard = {
+			loaded: function(id) {
+				var el = angular.element('#' + id),
+					scope = el.scope();
+
+				el.get(0).setClipboardData(scope.data);
+			},
+			copied: function(id) {
+				var el = angular.element('#' + id),
+					scope = el.scope();
+
+				if(scope.onCopied)
+					scope.onCopied(el.parents('.btn-clipboard'));
+			}
+		};
+
 		return {
 			restrict: 'EA',
 			transclude: true,
@@ -33,58 +49,51 @@ angular.module('reepioClipboardDirective', [])
 				data: '=clipboardData',
 				onCopied: '=?'
 			},
-			template: function (tElement, tAttrs, transclude) {
-				tAttrs.id = clipboardDirectiveIdService.getUniqueId();
-				return '<div class="btn-clipboard"><div id="' + tAttrs.id + '"></div><span ng-transclude></span></div>';
-			},
-			link: function (scope, el, attrs) {
-				var flashObj;
+			template: '<div class="btn-clipboard"><span ng-transclude></span></div>',
+			link: function (scope, element, attrs) {
+				scope.id = clipboardDirectiveIdService.getUniqueId();
+
+				// append swf container
+				var swfContainer = '<div id="' + scope.id + '"></div>';
+				var html = $compile(swfContainer)(scope);
+				element.find('.btn-clipboard').prepend(html);
 
 				if( typeof swfobject === 'undefined')
 					throw new Error("swfobject is required");
 
-				var bgColor = angular.element(el).find('.btn-clipboard').css('background-color');
+				var flashObj, bgColor, flashvars, attributes;
 
-				// gets called by flash ExternalInterface
-				window.clipboard = {
-					loaded: function() {
-						flashObj.setClipboardData(scope.data);
-					},
-					copied: function() {
-						if(scope.onCopied)
-							scope.onCopied(el);
-					}
-				};
+				bgColor = element
+					.find('.btn-clipboard')
+					.css('background-color');
 
-				var flashvars = {
+				flashvars = {
 					data: scope.data,
-					bgcolor: '0x' + converterService.rgb2hex(bgColor)
+					bgcolor: '0x' + converterService.rgb2hex(bgColor),
+					id: scope.id
 				};
 
-				var attributes = {
-					id: attrs.id
+				attributes = {
+					id: scope.id
 				};
 
 				swfobject.embedSWF(
 					clipboardSwf,
-					attrs.id, "100%", "100%", "10.0.0",
+					scope.id, "100%", "100%", "10.0.0",
 					clipboardExpressInstallSwf,
 					flashvars, params, attributes, function(e) {
 						if( ! e.success)
 						{
-							el.remove();
-							throw new Error("Could not initialize " + reepioClipboardSwf);
+							//el.remove();
+							throw new Error("Could not initialize " + clipboardSwf);
 						}
 
 						flashObj = document.getElementById(e.id);
 					});
 
 				scope.$watch('data', function (newValue) {
-					if( ! flashObj || ! newValue)
-						return;
-
-					if(flashObj.setClipboardData)
-						flashObj.setClipboardData(newValue);
+					if(element.setClipboardData)
+						element.setClipboardData(newValue);
 				});
 			}
 		}

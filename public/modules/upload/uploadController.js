@@ -48,7 +48,9 @@
                 var $initializing = true;
 
 				$scope.onClipboardCopied = function (el) {
-					el = angular.element(el).find('.btn-clipboard-label');
+					el = angular.element(el)
+						.find('.btn-clipboard-label');
+
 					el.tooltip('enable');
 					el.tooltip('show');
 
@@ -201,7 +203,6 @@
                 var paste = $.paste().appendTo('body');
 
                 paste.on('pasteImage', function (e, data){
-                    console.log('test');
                     $scope.$apply(function() {
                         //data:image/png;base64,....
                         var byteString = atob(data.dataURL.split(',')[1]);

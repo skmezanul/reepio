@@ -1,6 +1,6 @@
 {
   "name": "reep.io",
-  "version": "0.0.0-4",
+  "version": "1.2.0",
   "description": "",
   "dependencies": {
     "peer": "~0.2.5"
@@ -8,7 +8,7 @@
   "scripts": {
     "start-peering-server": "node ./node_modules/reepio-peering-server/src/server.js --port=9000 --key=reepio",
     "start-prod": "http-server dist -a localhost -p 8001 -c-1",
-    "start": "http-server -a localhost -p 8000 -c-1",
+    "start": "npm install && bower install && http-server -a localhost -p 8000 -c-1",
     "test": "karma start karma.conf.js"
   },
   "author": "",

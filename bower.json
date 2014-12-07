@@ -1,0 +1,30 @@
+{
+  "name": "reep.io",
+  "version": "1.2.0",
+  "homepage": "https://github.com/KodeKraftwerk/reep.io",
+  "authors": [
+    "korve <aeckardt@outlook.com>"
+  ],
+  "license": "GPL v2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-route": "~1.2",
+    "angular-animate": "~1.2",
+    "peerjs": "~0.3.x",
+    "angulartics": "~0.17.1",
+    "jquery": "1.11.x",
+    "threejs": "*",
+    "bootstrap": "~3.3.1",
+    "angular-bootstrap": "~0.12.0",
+	  "reepio-paste-to-clipboard": "https://github.com/KodeKraftwerk/reepio-copy-to-clipboard.git"
+  }
+}

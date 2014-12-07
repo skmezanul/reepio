@@ -8,21 +8,22 @@ module.exports = function(grunt) {
         ngAnnotate: {
 			angular: {
 				src: [
-					'public/assets/js/jquery-1.11.1.js',
-					'public/assets/js/angularjs/angular.js',
-					'public/assets/js/angularjs/angular-animate.js',
-					'public/assets/js/angularjs/angular-route.js',
-					'public/assets/js/angulartics/angulartics.js',
-					'public/assets/js/angulartics/angulartics-piwik.js'
+					'public/assets/bower_components/jquery/dist/jquery.js',
+					'public/assets/bower_components/angular/angular.js',
+					'public/assets/bower_components/angular-route/angular-route.js',
+					'public/assets/bower_components/angular-animate/angular-animate.js',
+					'public/assets/bower_components/angulartics/src/angulartics.js',
+					'public/assets/bower_components/angulartics/src/angulartics-piwik.js',
 				],
 				dest: 'build/lib/angular.js'
 			},
 			thirdparty: {
 				src: [
-					'public/assets/js/bootstrap.js',
+					'public/assets/bower_components/bootstrap/dist/js/bootstrap.js',
 					'public/assets/js/ui-bootstrap-0.11.0.js',
-					'public/assets/js/three.js',
-					'public/assets/js/peer.js',
+					'public/assets/bower_components/reepio-paste-to-clipboard/bin/js/swfobject.js',
+					'public/assets/bower_components/threejs/build/three.js',
+					'public/assets/bower_components/peerjs/peer.js',
 					'public/assets/js/jquery.socialshareprivacy.js',
 					'public/assets/js/paste.js/paste.js'
 				],
@@ -87,6 +88,7 @@ module.exports = function(grunt) {
 						cwd: 'public', 
 						dest: 'dist/',
 						src: [
+							'assets/**/*.swf',
 							'assets/css/*.min.css',
 							'assets/fonts/**', 
 							'assets/images/**', 
