@@ -5,6 +5,9 @@
 angular.module('reepioClipboardDirective', [])
 	.value('clipboardSwf', 'CopyToClipboard.swf')
 	.value('clipboardExpressInstallSwf', 'expressInstall.swf')
+	.config(function () {
+		swfobject.switchOffAutoHideShow();
+	})
 	.service('clipboardDirectiveIdService', [function () {
 		return {
 			__id: 0,
@@ -18,7 +21,6 @@ angular.module('reepioClipboardDirective', [])
 
 		var params = {
 			menu: "false",
-			scale: "noScale",
 			allowFullscreen: "false",
 			allowScriptAccess: "always",
 			bgcolor: "",
