@@ -36,9 +36,13 @@
                 chunksOfCurrentBlockReceived: 0,
                 downloadedChunksSinceLastCalculate: 0,
                 progress: 0,
-                noFileSystem: false
+                noFileSystem: false,
+                isStreamAble: false
             };
 
+            this.streamBuffer = [];
+            this.isStream = false;
+            this.isStreamingRunning = false;
             this.intervalProgress = null;
 
             this.downloadState = 'connecting';
@@ -132,6 +136,54 @@
                 );
             };
 
+            this.startStream = function(){
+                this.video = document.querySelector('video');
+                this.mediaSource = new MediaSource();
+                this.video.src = window.URL.createObjectURL(this.mediaSource);
+
+                this.mediaSource.addEventListener('sourceopen', function(){
+                    this.sourceBuffer = this.mediaSource.addSourceBuffer(this.getCodecToType(this.file.type));
+                    this.startDownload();
+
+                    this.sourceBuffer.addEventListener('updateend', function(e) {
+                        if(this.streamBuffer.length > 0){
+                            this.appendChunkToStream(this.streamBuffer.shift());
+                        }else{
+                            this.streamInterval = setInterval(function(){
+                                if(this.streamBuffer.length > 0){
+                                    this.appendChunkToStream(this.streamBuffer.shift());
+                                    clearInterval(this.streamInterval);
+                                }
+                            }.bind(this), 50);
+                        }
+                    }.bind(this));
+
+                    this.sourceBuffer.addEventListener('error', function(e){console.log(e);});
+                }.bind(this), false);
+                this.mediaSource.addEventListener('error', function(e) { console.log(e);});
+
+                this.isStreamingRunning = true;
+                this.isStream = true;
+            }
+
+            this.appendChunkToStream = function(chunk){
+                try{
+                    this.sourceBuffer.appendBuffer(new Uint8Array(chunk));
+                }catch(e){
+                    this.abortStream();
+                }
+            }
+
+            this.abortStream = function(){
+                this.isStream = false;
+                this.isStreamingRunning = false;
+                this.streamBuffer = [];
+//                clearInterval(this.intervalProgress);
+                clearInterval(this.streamInterval);
+//                this.cancelUpload();
+                this.emitEvent('errorPlayingStream');
+            }
+
             this.progressCalculations = function(){
 
                 this.file.bytesPerSecond = (this.file.downloadedChunksSinceLastCalculate * config.chunkSize);
@@ -164,7 +216,41 @@
                 });
             };
 
+            this.isStreamAble = function(type){
+                window.MediaSource = window.MediaSource || window.WebKitMediaSource;
+
+                if(window.MediaSource === undefined){
+                    return false;
+                }
+
+                return MediaSource.isTypeSupported(this.getCodecToType(type));
+            }
+
+            this.getCodecToType = function(type){
+                if(type == 'video/mp4'){
+                    return 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+                }
+
+                if(type == 'video/ogg'){
+                    return 'video/ogg; codecs="theora, vorbis"';
+                }
+
+                if(type == 'video/webm'){
+                    return 'video/webm; codecs="vorbis, vp8, vp9"';
+                }
+
+                return 'No codec found';
+            }
+
             this.__onPacketFileData = function(data){
+                if(this.isStream){
+                    if(this.file.chunksReceived == 0){
+                        this.appendChunkToStream(data);
+                    }else{
+                        this.streamBuffer.push(data);
+                    }
+                }
+
                 this.file.chunksReceived++;
                 this.file.chunksOfCurrentBlockReceived++;
                 this.file.downloadedChunksSinceLastCalculate++;
@@ -210,6 +296,7 @@
                 this.file.name = data.fileName;
                 this.file.size = data.fileSize;
                 this.file.type = data.fileType;
+                this.file.isStreamAble = this.isStreamAble(data.fileType);
                 this.file.totalChunksToReceive = Math.ceil(data.fileSize / config.chunkSize);
 
                 this.downloadState = 'ready';

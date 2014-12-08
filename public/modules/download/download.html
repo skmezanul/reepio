@@ -1,12 +1,13 @@
-<!--<div class="embed-responsive embed-responsive-16by9" ng-show="isStreamingRunning == true">-->
-    <!--<video controls autoplay width="100%" height="auto"></video>-->
-<!--</div>-->
-
 <div class="container">
+
+    <div class="col-md-10 col-md-push-1" data-ng-show="downloadService.isStreamingRunning == true">
+        <video controls autoplay width="100%" height="auto"></video>
+    </div>
+
     <div class="col-md-10 col-md-push-1" data-ng-show="getIsDownloadVisible()">
         <div class="row">
             <div class="col-xs-12">
-                <div id="page-download" data-ng-class="{ 'page-download-streaming': isStreamingRunning, 'page-download-image': isImage }">
+                <div id="page-download" data-ng-class="{ 'page-download-streaming': downloadService.isStreamingRunning, 'page-download-image': isImage }">
 
                     <p class="lead">
                         This is a peer-to-peer download. You will download the file below directly from another peer. <a
@@ -61,18 +62,18 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="btn-group-justified">
-                                    <a class="btn btn-lg btn-primary" data-ng-click="downloadFile()" data-ng-show="downloadService.downloadState == 'ready' && isStreamingRunning != true">
+                                    <a class="btn btn-lg btn-primary" data-ng-click="downloadFile()" data-ng-show="downloadService.downloadState == 'ready' && downloadService.isStreamingRunning != true">
                                         <span class="fa fa-download"></span> Download
                                     </a>
 
-                                    <a class="btn btn-lg btn-primary" data-ng-click="startStream()" data-ng-if="downloadService.downloadState == 'ready' && isStreamAble && isStreamingRunning == false">
+                                    <a class="btn btn-lg btn-primary" data-ng-click="startStream()" data-ng-if="downloadService.downloadState == 'ready' && downloadService.file.isStreamAble && downloadService.isStreamingRunning == false">
                                         <span class="fa fa-play"></span> Stream
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <div data-ng-show="downloadService.downloadState == 'inprogress' && isStreamingRunning == false">
+                        <div data-ng-show="downloadService.downloadState == 'inprogress' && downloadService.isStreamingRunning == false">
                             <div class="btn-group btn-group-justified">
                                 <a class="btn btn-lg btn-primary disabled col-xs-12">
                                     <span class="fa fa-refresh fa-spin"></span> Downloading...

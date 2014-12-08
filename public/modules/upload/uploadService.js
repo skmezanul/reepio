@@ -272,18 +272,6 @@
                                 var blob = this.uploads[data.fileId].file.slice(connectionData.startByte, (connectionData.startByte + config.chunkSize));
                             }
 
-//                            if(this.__clients[receiver.peer].cancelUpload == true){
-//                                this.__clients[id].reader = undefined;
-//                                this.__clients[receiver.peer].startByte = 0;
-//                                this.__clients[receiver.peer].chunksToSend = this.chunksPerBlock;
-//                                this.__clients[receiver.peer].cancelUpload = false;
-//                                this.emitEvent('uploadFinished', [receiver.peer]);
-//                                receiver.send({
-//                                    packet: 'SuccessFullCanceld'
-//                                });
-//                                return;
-//                            }
-
                             reader.readAsArrayBuffer(blob);
                         }
                     }.bind(this);

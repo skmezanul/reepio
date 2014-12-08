@@ -46,8 +46,6 @@
                     return;
                 }
 
-                $scope.isStreamAble = false;
-                $scope.isStreamingRunning = false;
                 $scope.isImage = false;
 
                 if($rootScope.downloadId.length == (config.peerIdLength + config.fileIdLength))
@@ -65,6 +63,13 @@
 
                     downloadService.startDownload();
                 };
+
+                $scope.startStream = function(){
+//                    $scope.isStreamingRunning = false;
+
+                    downloadService.startStream();
+                };
+
 
                 $scope.getIsDownloadVisible = function () {
                     return ! $scope.downloadError && ['ready', 'inprogress', 'paused', 'finished', 'datachannelClosed'].indexOf($rootScope.downloadService.downloadState) !== -1;
