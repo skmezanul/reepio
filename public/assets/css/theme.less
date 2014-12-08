@@ -294,14 +294,11 @@ body {
 		.bg-primary;
 		font-size: @font-size-h1;
 		text-align: center;
-		padding: 20px 15px;
 	}
 
 	&.file-icon-small {
-		font-size: @font-size-h3;
-		padding: 12px 15px 0; 
-		width: 60px;
-		height: 60px;
+		font-size: @font-size-h2;
+		padding: 20px 15px;
 	}
 
 	@media (max-width: @screen-xs-max) {
@@ -332,6 +329,7 @@ a.lock-file {
 #page-upload,
 #page-download {
 	.file-name {
+		.text-overflow();
 		h4 {
 			margin: 0 0 7px 0;
 			max-width: 80%;

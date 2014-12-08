@@ -35,13 +35,14 @@
 
             <div class="upload-queue">
                 <div class="upload-queue-item" data-ng-repeat="file in fileModel.files" data-ng-animate>
-                    <div class="media">
-                        <div class="media-left">
+
+                    <div class="row">
+                        <div class="col-sm-2">
                             <div class="bg-primary">
                                 <div data-p2m-file-icon data-file-type="file.rawFile.type" class="file-icon-small"></div>
                             </div>
                         </div>
-                        <div class="media-body">
+                        <div class="col-sm-10">
                             <button type="button" class="close pull-right" data-ng-click="removeFile(file.uniqueUrl)">
                                 &times;
                                 <span class="sr-only">Close upload</span>

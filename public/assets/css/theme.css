@@ -6487,7 +6487,6 @@ a.navbar-brand .beta-badge:focus {
   background-color: #bd2222;
   font-size: 36px;
   text-align: center;
-  padding: 20px 15px;
 }
 a.file-icon.file-icon-default:hover,
 a.file-icon.file-icon-small:hover,
@@ -6495,10 +6494,8 @@ a.file-icon.file-icon-large:hover {
   background-color: #921a1a;
 }
 .file-icon.file-icon-small {
-  font-size: 24px;
-  padding: 12px 15px 0;
-  width: 60px;
-  height: 60px;
+  font-size: 30px;
+  padding: 20px 15px;
 }
 @media (max-width: 767px) {
   .file-icon.file-icon-default,
@@ -6526,6 +6523,12 @@ a.lock-file {
 ---------------------------- */
 .error-page {
   text-align: center;
+}
+#page-upload .file-name,
+#page-download .file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #page-upload .file-name h4,
 #page-download .file-name h4 {
