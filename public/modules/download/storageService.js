@@ -642,7 +642,7 @@
 
             this.getFileEntry = function(fileIdentifier){
                 return this.files[fileIdentifier].fileEntry;
-            }
+            };
 
             this.generateFileIdentifier = function(fileName, fileSize){
                 return $crypto.crc32(fileName + fileSize);
