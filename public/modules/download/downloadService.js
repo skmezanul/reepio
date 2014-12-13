@@ -119,10 +119,29 @@
 				$rootScope.$emit('DownloadStateChanged', this.downloadState);
 
                 this.intervalProgress = setInterval(this.progressCalculations.bind(this), 1000);
-
+                var self = this;
                 storageService.getStorageForFile(this.file.name, this.file.size).then(
                     function(fileIdentifier){
                         this.file.fileIdentifier = fileIdentifier;
+
+                        var fileEntry = storageService.getFileEntry(fileIdentifier);
+
+                        if(self.isStream){
+                            if(fileEntry !== undefined){
+                                fileEntry.file(function(file) {
+                                    var reader = new FileReader();
+
+                                    reader.onloadend = function(e) {
+                                        self.appendChunkToStream(this.result);
+                                        self.requestBlock(self.file.chunksReceived);
+                                    };
+
+                                    reader.readAsArrayBuffer(file);
+                                }, function(){});
+
+                                return;
+                            }
+                        }
 
                         this.requestBlock(this.file.chunksReceived);
                     }.bind(this),
@@ -181,7 +200,7 @@
 //                clearInterval(this.intervalProgress);
                 clearInterval(this.streamInterval);
 //                this.cancelUpload();
-                this.emitEvent('errorPlayingStream');
+                $rootScope.$emit('errorPlayingStream');
             }
 
             this.progressCalculations = function(){

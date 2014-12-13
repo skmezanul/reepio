@@ -56,6 +56,7 @@
                     function(data){
                         this.files[fileIdentifier].sizeOfExistingFileTemp = data.metaData.size;
                         this.files[fileIdentifier].fileSystemUrl = data.fileEntry.toURL('application/unknown');
+                        this.files[fileIdentifier].fileEntry = data.fileEntry;
                         deferred.resolve(data.metaData);
                     }.bind(this),
                     function(){
@@ -63,6 +64,7 @@
                             function(data){
                                 this.files[fileIdentifier].sizeOfExistingFilePersitent = data.metaData.size;
                                 this.files[fileIdentifier].fileSystemUrl = data.fileEntry.toURL('application/unknown');
+                                this.files[fileIdentifier].fileEntry = data.fileEntry;
                                 deferred.resolve(data.metaData);
                             }.bind(this),
                             function(){
@@ -637,6 +639,10 @@
 
                 return deferred.promise;
             };
+
+            this.getFileEntry = function(fileIdentifier){
+                return this.files[fileIdentifier].fileEntry;
+            }
 
             this.generateFileIdentifier = function(fileName, fileSize){
                 return $crypto.crc32(fileName + fileSize);
