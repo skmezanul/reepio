@@ -6,7 +6,6 @@
     "peer": "~0.2.5"
   },
   "scripts": {
-    "start-peering-server": "node ./node_modules/reepio-peering-server/src/server.js --port=9000 --key=reepio",
     "start-prod": "http-server dist -a localhost -p 8001 -c-1",
     "start": "npm install && bower install && http-server -a localhost -p 8000 -c-1",
     "test": "karma start karma.conf.js"
@@ -33,7 +32,6 @@
     "karma-ie-launcher": "~0.1",
     "karma-junit-reporter": "^0.2.2",
     "protractor": "^1.1.1",
-    "reepio-server": "git://github.com/KodeKraftwerk/reepio-peering-server.git",
     "shelljs": "^0.2.6"
   },
   "subdomain": "kodekraftwerk-reepio",

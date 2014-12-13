@@ -36,7 +36,7 @@
                 }
 
                 return false;
-            }
+            };
 
             this.checkIfFileExits = function(fileName, fileSize){
                 var deferred = $q.defer();
@@ -73,7 +73,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.findFileInTemporaryStorage = function(fileIdentifier, fileName, fileSize){
                 var deferred = $q.defer();
@@ -102,7 +102,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.findFileInPersitentStorage = function(fileIdentifier, fileName, fileSize){
                 var deferred = $q.defer();
@@ -142,14 +142,14 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.initilizeFileObject = function(fileIdentifier){
                 this.files[fileIdentifier] = {};
                 this.files[fileIdentifier].blockBuffer = [];
                 this.files[fileIdentifier].sizeOfExistingFileTemp = 0;
                 this.files[fileIdentifier].sizeOfExistingFilePersitent = 0;
-            }
+            };
 
             this.getStorageForFile = function(fileName, fileSize){
                 var deferred  = $q.defer();
@@ -187,7 +187,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             /**
              * Temp Storage
@@ -227,7 +227,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.requestTemporaryStorageFileSystem = function(fileSize){
                 var deferred  = $q.defer();
@@ -241,10 +241,10 @@
                     function(){
                         deferred.reject();
                     }
-                )
+                );
 
                 return deferred.promise;
-            }
+            };
 
             this.getFreeTemporaryStorageSpace = function(){
                 var deferred  = $q.defer();
@@ -261,7 +261,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             /**
              * Persisten Storage
@@ -338,7 +338,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.getFreePersistentStorageSpace = function(){
                 var deferred  = $q.defer();
@@ -355,7 +355,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.requestPersistentStorageQuota = function(){
                 var deferred  = $q.defer();
@@ -371,7 +371,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.requestPersistentStorageFileSystem = function(fileSize){
                 var deferred  = $q.defer();
@@ -385,10 +385,10 @@
                     function(){
                         deferred.reject();
                     }
-                )
+                );
 
                 return deferred.promise;
-            }
+            };
 
             this.initializeFiles = function(fileSystem, fileIdentifier, fileName){
                 var deferred  = $q.defer();
@@ -463,21 +463,21 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.createFolder = function(fileSystem, fileIdentifier){
                 var deferred  = $q.defer();
 
                 fileSystem.root.getDirectory(fileIdentifier, {create: true},
                     function(dirEntry) {
-                        deferred.resolve();
-                    },function(e){
-                        deferred.reject();
+                        deferred.resolve(dirEntry);
+                    },function(err){
+                        deferred.reject(err);
                     }
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.getFile = function(fileSystem, file, opts){
                 var deferred  = $q.defer();
@@ -494,7 +494,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.getFileWriter = function(fileEntry){
                 var deferred  = $q.defer();
@@ -509,7 +509,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.cleanUpFilesystem = function(fileSystem, fileIdentifier){
                 var deferred  = $q.defer();
@@ -534,7 +534,7 @@
                 );
 
                 return deferred.promise;
-            }
+            };
 
             this.deleteEntries = function(entries, index, fileSystem, fileIdentifier){
                 var deferred  = $q.defer();
@@ -601,11 +601,11 @@
 
 
                 return deferred.promise;
-            }
+            };
 
             this.addChunkToFileBuffer = function(fileIdentifier, chunk){
                 this.files[fileIdentifier].blockBuffer.push(chunk);
-            }
+            };
 
             this.getUrlForFinishedDownload = function(fileIdentifier){
                 var deferred  = $q.defer();
@@ -636,10 +636,10 @@
                 }
 
                 return deferred.promise;
-            }
+            };
 
             this.generateFileIdentifier = function(fileName, fileSize){
                 return $crypto.crc32(fileName + fileSize);
-            }
+            };
         }]);
 })();
