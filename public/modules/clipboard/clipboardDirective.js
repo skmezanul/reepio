@@ -86,7 +86,7 @@ angular.module('reepioClipboardDirective', [])
 					flashvars, params, attributes, function(e) {
 						if( ! e.success)
 						{
-							//el.remove();
+							element.remove();
 							throw new Error("Could not initialize " + clipboardSwf);
 						}
 
