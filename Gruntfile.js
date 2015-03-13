@@ -193,7 +193,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-fingerprint');
 	grunt.loadNpmTasks('grunt-string-replace');
-	grunt.loadNpmTasks('grunt-deploy');
 
 	grunt.registerTask('default', [
 		'ngAnnotate',

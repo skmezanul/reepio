@@ -183,7 +183,7 @@
 
                 this.isStreamingRunning = true;
                 this.isStream = true;
-            }
+            };
 
             this.appendChunkToStream = function(chunk){
                 try{
@@ -191,7 +191,7 @@
                 }catch(e){
                     this.abortStream();
                 }
-            }
+            };
 
             this.abortStream = function(){
                 this.isStream = false;
@@ -201,7 +201,7 @@
                 clearInterval(this.streamInterval);
 //                this.cancelUpload();
                 $rootScope.$emit('errorPlayingStream');
-            }
+            };
 
             this.progressCalculations = function(){
 
@@ -243,7 +243,7 @@
                 }
 
                 return MediaSource.isTypeSupported(this.getCodecToType(type));
-            }
+            };
 
             this.getCodecToType = function(type){
                 if(type == 'video/mp4'){
@@ -259,7 +259,7 @@
                 }
 
                 return 'No codec found';
-            }
+            };
 
             this.__onPacketFileData = function(data){
                 if(this.isStream){
@@ -273,10 +273,15 @@
                 this.file.chunksReceived++;
                 this.file.chunksOfCurrentBlockReceived++;
                 this.file.downloadedChunksSinceLastCalculate++;
+				this.file.progress = (this.file.chunksReceived / this.file.totalChunksToReceive) * 100;
+
+				if(this.file.chunksReceived !== this.file.totalChunksToReceive && (this.file.chunksOfCurrentBlockReceived % config.chunksPerBlock) == 0)
+				{
+					this.file.chunksOfCurrentBlockReceived = 0;
+					this.requestBlock(this.file.chunksReceived);
+				}
 
                 storageService.addChunkToFileBuffer(this.file.fileIdentifier, data);
-
-                this.file.progress = (this.file.chunksReceived / this.file.totalChunksToReceive) * 100;
 
                 if(this.file.chunksReceived == this.file.totalChunksToReceive){
                     storageService.getUrlForFinishedDownload(this.file.fileIdentifier).then(
@@ -295,11 +300,6 @@
                             });
                         }.bind(this)
                     );
-                }else{
-                    if((this.file.chunksOfCurrentBlockReceived % config.chunksPerBlock) == 0){
-                        this.file.chunksOfCurrentBlockReceived = 0;
-                        this.requestBlock(this.file.chunksReceived);
-                    }
                 }
             };
 

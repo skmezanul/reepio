@@ -29,7 +29,9 @@ angular.module('reepioClipboardDirective', [])
 
 		// gets called by flash ExternalInterface
 		window.clipboard = {
+			ready: false,
 			loaded: function(id) {
+				window.clipboard.ready = true;
 				var el = angular.element('#' + id),
 					scope = el.scope();
 
@@ -94,9 +96,18 @@ angular.module('reepioClipboardDirective', [])
 					});
 
 				scope.$watch('data', function (newValue) {
-					if(element.setClipboardData)
+					if(typeof newValue !== 'undefined' && element.setClipboardData)
 						element.setClipboardData(newValue);
 				});
+
+				// check if flash plugin has been blocked
+				setTimeout(function () {
+					if(window.clipboard.ready)
+						return;
+
+					element.remove();
+					flashObj.remove();
+				}, 300);
 			}
 		}
 	}]);
