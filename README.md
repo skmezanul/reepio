@@ -8,7 +8,7 @@ reep.io uses modern WebRTC technology to enable peer-to-peer file transfers betw
 
 Peer-to-Peer file transfers
 ---
-With reep.io (reep = peer spelled backwars, duh) you can transfer files directly to another browser. You can transfer anything you want without storing the data on a server first. You can even stream video files or preview images directly. 
+With reep.io (reep = peer spelled backwards, duh) you can transfer files directly to another browser. You can transfer anything you want without storing the data on a server first. You can even stream video files or preview images directly. 
 
 Privacy
 ---
