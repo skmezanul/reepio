@@ -11,7 +11,7 @@
     "test": "karma start karma.conf.js"
   },
   "author": "",
-  "license": "GPL v2",
+  "license": "GPL-2.0",
   "devDependencies": {
     "bootstrap": "git://github.com/twbs/bootstrap.git",
     "bower": "^1.3.1",
