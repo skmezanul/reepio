@@ -1,7 +1,5 @@
 .idea
+.vagrant
 node_modules
 dist
-.DS_Store
-._*
-*.sublime-project
-npm_debug.log
+build

@@ -1,0 +1,13 @@
+{
+  "name": "reepio-paste-to-clipboard",
+  "homepage": "https://github.com/KodeKraftwerk/reepio-copy-to-clipboard",
+  "_release": "f6b6e36e09",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f6b6e36e09127c2f20dec90e3f5371542964fa9a"
+  },
+  "_source": "https://github.com/KodeKraftwerk/reepio-copy-to-clipboard.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/KodeKraftwerk/reepio-copy-to-clipboard.git"
+}

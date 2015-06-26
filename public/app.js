@@ -51,8 +51,8 @@
 			$locationProvider.html5Mode(appEnv !== 'dev');
 			$analyticsProvider.virtualPageviews(false);
 		}])
-		.value('clipboardSwf', '/assets/bower_components/reepio-paste-to-clipboard/bin/CopyToClipboard.swf')
-		.value('clipboardExpressInstallSwf', '/assets/bower_components/reepio-paste-to-clipboard/bin/expressInstall.swf')
+		.value('clipboardSwf', '/bower_components/reepio-paste-to-clipboard/bin/CopyToClipboard.swf')
+		.value('clipboardExpressInstallSwf', '/bower_components/reepio-paste-to-clipboard/bin/expressInstall.swf')
 		.run(['$rootScope', '$location', '$route', '$document', 'appEnv',
 		function ($rootScope, $location, $route, $document, appEnv) {
 			$rootScope.appEnv = appEnv;
@@ -67,27 +67,27 @@
 					services : {
 						facebook : {
 							'perma_option' : 'off',
-							'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_facebook_en.png',
-							'img' : 'assets/js/socialshareprivacy/images/facebook.png',
+							'dummy_img' : 'js/socialshareprivacy/images/dummy_facebook_en.png',
+							'img' : 'js/socialshareprivacy/images/facebook.png',
 							'sharer': {
 								'status': 	'on',
-								'dummy_img':'assets/js/socialshareprivacy/images/dummy_facebook_share_en.png',
-								'img' : 	'assets/js/socialshareprivacy/images/facebook_share_en.png'
+								'dummy_img':'js/socialshareprivacy/images/dummy_facebook_share_en.png',
+								'img' : 	'js/socialshareprivacy/images/facebook_share_en.png'
 							}
 						},
 						twitter : {
 							'perma_option' : 'off',
-							'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_twitter.png',
-							'img' : 'assets/js/socialshareprivacy/images/twitter.png'
+							'dummy_img' : 'js/socialshareprivacy/images/dummy_twitter.png',
+							'img' : 'js/socialshareprivacy/images/twitter.png'
 						},
 						gplus : {
 							'perma_option' : 'off',
-							'dummy_img' : 'assets/js/socialshareprivacy/images/dummy_gplus.png',
-							'img' : 'assets/js/socialshareprivacy/images/gplus.png'
+							'dummy_img' : 'js/socialshareprivacy/images/dummy_gplus.png',
+							'img' : 'js/socialshareprivacy/images/gplus.png'
 						}
 					},
 					'css_path'  : '',
-					'lang_path' : 'assets/js/socialshareprivacy/lang/',
+					'lang_path' : 'js/socialshareprivacy/lang/',
 					'language'  : 'en',
 					'uri'		: 'https://reep.io',
 					'perma_orientation' : 'top'

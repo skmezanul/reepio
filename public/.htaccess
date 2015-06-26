@@ -7,13 +7,13 @@ RewriteBase /
 #@@DIST_RULES
 
 # rewrite fingerprint assets
-RewriteRule ^assets/css/[a-z0-9]{32}(.*) assets/css/$1 [L]
+RewriteRule ^css/[a-z0-9]{32}(.*) css/$1 [L]
 RewriteRule ^[a-z0-9]{32}((app|libs)\.min\.js)$ $1 [L]
 
 # fixes fontello font path
-RewriteRule ^assets/font/(.*) assets/fonts/fontello/font/$1 [L]
+RewriteRule ^font/(.*) fonts/fontello/font/$1 [L]
 
-RewriteCond $1 !^(partials|assets|scripts|robots\.txt|favicon\.ico)
+RewriteCond $1 !^(partials|css|js|fonts|images|scripts|robots\.txt|favicon\.ico)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 

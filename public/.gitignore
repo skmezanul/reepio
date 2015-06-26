@@ -1,4 +1,2 @@
 config.js
-generated
-libs.min.js
-app.min.js
+bower_components

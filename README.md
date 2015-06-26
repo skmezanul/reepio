@@ -1,34 +1,40 @@
 reep.io
 =======
-A browser based peer-to-peer file transfer platform. See it live here: https://reep.io
+A browser based peer-to-peer file transfer platform. It is running at [https://reep.io](https://reep.io)
 
 What is reep.io?
 ---
-reep.io uses modern WebRTC technology to enable peer-to-peer file transfers between two browser.
+reep.io uses WebRTC technology to enable peer-to-peer file transfers between two browser without any server interaction. 
+This repository holds the sources to run the reep.io frontend.  
+**You will need a ICE and Peering server to run this project.** You can find the reep.io peering server [here](https://github.com/KodeKraftwerk/reepio-peering-server)
 
-Peer-to-Peer file transfers
+Configuration
 ---
-With reep.io (reep = peer spelled backwards, duh) you can transfer files directly to another browser. You can transfer anything you want without storing the data on a server first. You can even stream video files or preview images directly. 
+You can set some options in the public/config.js (if it does not exist, copy the config.dist.yml)
+Have a look into the `config.dist.js` to get an overview over the available options
 
-Privacy
+Installation
 ---
-reep.io's only purpose is to make it easy for you to connect to your buddy by providing you with a link that automatically connects you both. After the initial handshake we are out. The file transfer now only happens between you two without up- and downloading the file to a server.
+> vagrant up  
+> vagrant ssh  
+> cd reepio
+> npm install  
+> npm start
 
-Security
----
-The whole communication is encrypted using Datagram Transport Layer Security (DTLS) using SSL. This reduces the risk of man in the middle attacks.
+You can now access the site by visiting [http://127.0.0.1:8080/index_dev.html](http://127.0.0.1:8080/index_dev.html)
 
-Used libraries
+Building a `dist` (compressed) version
 ---
-* https://github.com/peers/peerjs/ The webrtc js library used. This made reep.io even possible.
-* https://github.com/layerssss/paste.js/
-* https://getbootstrap.com/
-* http://jquery.com/
-* https://angularjs.org/
-* https://github.com/luisfarzati/angulartics
-* https://github.com/mrdoob/three.js/
-* http://www.heise.de/extras/socialshareprivacy/
+> vagrant up  
+> vagrant ssh  
+> cd reepio
+> npm install  
+> grunt
+> npm run-script start-prod
+
+This will compile the reep.io sources into a `dist` folder. You can use this version to install it onto your own server.
+
 
 License
 ---
-reep.io uses the [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html) license
+reep.io uses the [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html) license  
