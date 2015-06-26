@@ -10,7 +10,7 @@ This repository holds the sources to run the reep.io frontend.
 
 Configuration
 ---
-You can set some options in the public/config.js (if it does not exist, copy the config.dist.yml)
+You can set some options in the public/config.js (if it does not exist, copy the config.dist.js)
 Have a look into the `config.dist.js` to get an overview over the available options
 
 Installation
