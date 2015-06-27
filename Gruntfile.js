@@ -8,9 +8,6 @@ module.exports = function (grunt) {
         copy: {
             src: {
                 files: [
-                    // copy templates
-                    { cwd: 'src/html', expand: true, src: ['**/*.html'], dest: 'public/html/', filter: 'isFile' },
-
                     // copy js
                     { cwd: 'src/js', expand: true, src: ['**/*.js'], dest: 'public/js/', filter: 'isFile' },
                 ]
