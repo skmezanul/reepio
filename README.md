@@ -15,13 +15,22 @@ Have a look into the `config.dist.js` to get an overview over the available opti
 
 Installation
 ---
-> npm install
-
-> grunt
-
-> npm start
+> vagrant up && vagrant ssh 
+> cd reepio
+> npm install && npm start 
 
 You can now access the site by visiting [http://127.0.0.1:8080/index_dev.html](http://127.0.0.1:8080/index_dev.html)
+
+Building a `dist` (compressed) version
+---
+> vagrant up && vagrant ssh 
+> cd reepio
+> npm install  
+> grunt
+> npm run-script start-prod
+
+This will compile the reep.io sources into a `dist` folder. You can use this version to install it onto your own server.
+
 
 License
 ---
