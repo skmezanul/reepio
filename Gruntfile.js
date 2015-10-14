@@ -10,6 +10,8 @@ module.exports = function (grunt) {
                 files: [
                     // copy js
                     { cwd: 'src/js', expand: true, src: ['**/*.js'], dest: 'public/js/', filter: 'isFile' },
+                    // copy html
+                    { cwd: 'src/html', expand: true, src: ['**/*.html'], dest: 'public/html/', filter: 'isFile' },
                 ]
             }
         },
