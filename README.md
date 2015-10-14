@@ -16,7 +16,9 @@ Have a look into the `config.dist.js` to get an overview over the available opti
 Installation
 ---
 > npm install
+
 > grunt
+
 > npm start
 
 You can now access the site by visiting [http://127.0.0.1:8080/index_dev.html](http://127.0.0.1:8080/index_dev.html)
