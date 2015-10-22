@@ -6,9 +6,8 @@
     "peer": "^0.2.0"
   },
   "scripts": {
-    "start-prod": "http-server dist -a 0.0.0.0 -p 8080 -c-1",
     "start": "http-server public -a 0.0.0.0 -p 8080 -c-1",
-    "test": "karma start karma.conf.js",
+    "test": "karma start",
     "postinstall": "bower install && cp -n ./public/config.dist.js ./public/config.js"
   },
   "author": "https://github.com/kodekraftwerk",
@@ -17,7 +16,13 @@
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-html2js": "^0.3.2",
-    "grunt-ng-annotate": "^1.0.1"
+    "grunt-ng-annotate": "^1.0.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.12",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-ie-launcher": "^0.2.0",
+    "karma-jasmine": "^0.3.6"
   },
   "subdomain": "kodekraftwerk-reepio",
   "engines": {

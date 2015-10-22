@@ -76,6 +76,10 @@ Vagrant.configure(2) do |config|
     apt-get install --yes git nodejs
 
     # install global node libs
-    npm install -g http-server grunt-cli bower
+    npm install -g http-server grunt grunt-cli bower
+
+	# link grunt
+    cd reepio
+    npm link grunt
   SHELL
 end

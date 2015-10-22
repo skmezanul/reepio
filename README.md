@@ -13,24 +13,24 @@ Configuration
 You can set some options in the public/config.js (if it does not exist, copy the config.dist.js)
 Have a look into the `config.dist.js` to get an overview over the available options
 
-Installation
+Running reep.io
 ---
-	vagrant up && vagrant ssh 
+	vagrant up
+	vagrant ssh 
 	cd reepio
-	npm install && npm start 
+	npm install
+	npm start
 
-You can now access the site by visiting [http://127.0.0.1:8080/index_dev.html](http://127.0.0.1:8080/index_dev.html)
-
-Building a `dist` (compressed) version
+Running Unit-Tests
 ---
-	vagrant up && vagrant ssh 
-	cd reepio
-	npm install  
-	grunt
-	npm run-script start-prod
+You will have to run the end-to-end unit tests on your local machine, as the vagrant box has no gui or browser binaries.
 
-This will compile the reep.io sources into a `dist` folder. You can use this version to install it onto your own server.
+To do so, just run the following command:
 
+	npm test
+
+
+You can now access the site by visiting [http://192.168.0.120:8080/]()
 
 License
 ---
