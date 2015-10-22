@@ -16,7 +16,7 @@
     "watch-media": "watch 'npm run build-media' 'src/media'",
     "watch-less": "watch 'npm run build-less' 'src/less'",
     "watch": "parallelshell 'npm run watch-html' 'npm run watch-js' 'npm run watch-media' 'npm run watch-less'",
-    "start": "parallelshell 'http-server public -a 0.0.0.0 -p 9000 -c-1' 'npm run watch'",
+    "start": "parallelshell 'http-server public -a 0.0.0.0 -p 9001 -c-1' 'npm run watch'",
     "test": "karma start",
     "postinstall": "bower install --config.interactive=false"
   },

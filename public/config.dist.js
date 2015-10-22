@@ -7,7 +7,7 @@ angular.module('config', [])
         'chunkSize':      15000,    // big files get chunked into chunkSize
         'chunksPerBlock': 64,       // size of chunks in a block
         'peerConfig':     {
-            host:   '127.0.0.1',    // peering server address
+            host:   'localhost',    // peering server address
             path:   '/signaling',   // endpoint path
             port:   9000,
             key:    'reepio',       // client key when using multiple clients on the same peering server

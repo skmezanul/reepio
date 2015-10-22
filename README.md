@@ -22,7 +22,7 @@ Running locally
 
 The build script is run every time something has changed inside the `src` folder.
 
-You can now access the site by visiting [http://127.0.0.1:9000/]()
+You can now access the site by visiting [http://127.0.0.1:9001/]()
 
 Running with Vagrant
 ---
@@ -34,7 +34,7 @@ Running with Vagrant
 	npm run build
 	npm start
 
-You can now access the site by visiting [http://192.168.0.120:9000/]()
+You can now access the site by visiting [http://192.168.0.120:9001/]()
 
 Running Unit-Tests
 ---
