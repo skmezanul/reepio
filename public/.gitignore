@@ -2,3 +2,6 @@ config.js
 bower_components
 js
 html
+media
+index.html
+github-btn.html

@@ -6809,7 +6809,7 @@ body {
   padding-top: 100px;
   padding-bottom: 100px;
   font-weight: 300;
-  background: #0d0d0d url("../images/body-bg.png") top no-repeat;
+  background: #0d0d0d url("../media/body-bg.png") top no-repeat;
 }
 /** Navigation
 ---------------------------- */
@@ -7475,7 +7475,7 @@ a.tile:focus {
   margin-top: -7px;
 }
 #socialshareprivacy .social_share_privacy_area li .switch {
-  background-image: url(../js/socialshareprivacy/images/socialshareprivacy_on_off.png);
+  background-image: url(../bower_components/SocialSharePrivacy/images/socialshareprivacy_on_off.png);
 }
 .settings_info {
   display: none;
@@ -7487,7 +7487,7 @@ a.tile:focus {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #0d0d0d url("../images/body-bg.png") top no-repeat;
+  background: #0d0d0d url("../media/body-bg.png") top no-repeat;
   z-index: 1031;
   top: 0;
   left: 0;

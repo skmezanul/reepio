@@ -13,13 +13,16 @@ Configuration
 You can set some options in the public/config.js (if it does not exist, copy the config.dist.js)
 Have a look into the `config.dist.js` to get an overview over the available options
 
-Running reep.io
+Building reep.io
 ---
 	vagrant up
 	vagrant ssh 
 	cd reepio
 	npm install
+	npm run build
 	npm start
+
+The build script is run every time something has changed inside the `src folder/
 
 Running Unit-Tests
 ---
