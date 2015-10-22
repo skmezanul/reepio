@@ -23,6 +23,7 @@ Building reep.io
 	npm start
 
 The build script is run every time something has changed inside the `src folder/
+You can now access the site by visiting [http://192.168.0.120:8080/]()
 
 Running Unit-Tests
 ---
@@ -32,8 +33,6 @@ To do so, just run the following command:
 
 	npm test
 
-
-You can now access the site by visiting [http://192.168.0.120:8080/]()
 
 License
 ---
