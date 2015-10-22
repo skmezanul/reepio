@@ -13,17 +13,28 @@ Configuration
 You can set some options in the public/config.js (if it does not exist, copy the config.dist.js)
 Have a look into the `config.dist.js` to get an overview over the available options
 
-Building reep.io
+Running locally
 ---
-	vagrant up
-	vagrant ssh 
-	cd reepio
+	cp public/config.dist.js public/config.js
 	npm install
 	npm run build
 	npm start
 
 The build script is run every time something has changed inside the `src` folder.
-You can now access the site by visiting [http://192.168.0.120:8080/]()
+
+You can now access the site by visiting [http://127.0.0.1:9000/]()
+
+Running with Vagrant
+---
+	vagrant up
+	vagrant ssh 
+	cd reepio
+	cp public/config.dist.js public/config.js
+	npm install
+	npm run build
+	npm start
+
+You can now access the site by visiting [http://192.168.0.120:9000/]()
 
 Running Unit-Tests
 ---

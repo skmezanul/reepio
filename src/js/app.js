@@ -32,8 +32,7 @@
 		'titleController',
 		'common',
 		'angulartics',
-		'angulartics.piwik',
-		'reepIoLogoModule'
+		'angulartics.piwik'
 	];
 
 	angular.module('peertome', use, ['$compileProvider', function ($compileProvider) {
@@ -67,27 +66,27 @@
 					services : {
 						facebook : {
 							'perma_option' : 'off',
-							'dummy_img' : 'js/socialshareprivacy/images/dummy_facebook_en.png',
-							'img' : 'js/socialshareprivacy/images/facebook.png',
+							'dummy_img' : 'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/dummy_facebook_en.png',
+							'img' : 'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/facebook.png',
 							'sharer': {
 								'status': 	'on',
-								'dummy_img':'js/socialshareprivacy/images/dummy_facebook_share_en.png',
-								'img' : 	'js/socialshareprivacy/images/facebook_share_en.png'
+								'dummy_img':'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/dummy_facebook_share_en.png',
+								'img' : 	'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/facebook_share_en.png'
 							}
 						},
 						twitter : {
 							'perma_option' : 'off',
-							'dummy_img' : 'js/socialshareprivacy/images/dummy_twitter.png',
-							'img' : 'js/socialshareprivacy/images/twitter.png'
+							'dummy_img' : 'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/dummy_twitter.png',
+							'img' : 'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/twitter.png'
 						},
 						gplus : {
 							'perma_option' : 'off',
-							'dummy_img' : 'js/socialshareprivacy/images/dummy_gplus.png',
-							'img' : 'js/socialshareprivacy/images/gplus.png'
+							'dummy_img' : 'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/dummy_gplus.png',
+							'img' : 'bower_components/jquery.socialshareprivacy/socialshareprivacy/images/gplus.png'
 						}
 					},
 					'css_path'  : '',
-					'lang_path' : 'js/socialshareprivacy/lang/',
+					'lang_path' : 'bower_components/jquery.socialshareprivacy/lang/',
 					'language'  : 'en',
 					'uri'		: 'https://reep.io',
 					'perma_orientation' : 'top'

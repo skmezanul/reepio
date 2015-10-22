@@ -83,7 +83,7 @@
 			return new DialogService();		
 		}])
 		.run(['$templateCache', function ($templateCache) {
-			$templateCache.put('/default-dialog.html', '<div class="modal fade">' + 
+			$templateCache.put('/default-dialog.html', '<div class="modal fade">' +
 				'	{{ title }}' +
 				'</div>');
 		}]);

@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhosst:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -74,12 +74,5 @@ Vagrant.configure(2) do |config|
 
     # finally install everything
     apt-get install --yes git nodejs
-
-    # install global node libs
-    npm install -g http-server grunt grunt-cli bower
-
-	# link grunt
-    cd reepio
-    npm link grunt
   SHELL
 end
