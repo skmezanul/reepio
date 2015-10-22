@@ -29,8 +29,8 @@
                 controller: 'UploadCtrl'
             });
         }])
-        .controller('UploadCtrl', ['$scope', '$location', '$timeout', '$document', '$analytics', '$modal', 'uploadService', '$rootScope', 'detectCrawlerService', '$crypto',
-            function ($scope, $location, $timeout, $document, $analytics, $modal, uploadService, $rootScope, detectCrawlerService, $crypto) {
+        .controller('UploadCtrl', ['$scope', '$location', '$timeout', '$document', '$analytics', '$modal', 'uploadService', '$rootScope', 'detectCrawlerService', '$crypto', '$log',
+            function ($scope, $location, $timeout, $document, $analytics, $modal, uploadService, $rootScope, detectCrawlerService, $crypto, $log) {
                 $analytics.pageTrack($location.path());
 
                 //Show the incompatible site only to real users
@@ -81,7 +81,7 @@
 							file.fileId = id.fileId;
 							file.uniqueUrl = $location.absUrl() + 'd/' + id.peerId + id.fileId;
 						}, function (err) {
-							console.error(err);
+							$log.error(err);
 						});
 					}
 					else

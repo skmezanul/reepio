@@ -48,6 +48,9 @@
             }
 
 			function addFile(scope, file, el) {
+				if(file.size <= 0)
+					return;
+
                 file = {
                     rawFile: file,
                     fileId: null,
