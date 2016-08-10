@@ -114,7 +114,7 @@
                     $scope.modalDialogFile = file;
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'html/upload/modals/password.html',
+                        templateUrl: 'js/upload/modals/password.html',
                         controller: ['$scope', function($scope) {
                             $scope.input = {};
                             $scope.input.password = file.password;
