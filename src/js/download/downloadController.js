@@ -54,6 +54,8 @@
                 }
 				else
 				{
+					$rootScope.downloadId = null;
+					$rootScope.cryptoDownloadId = null;
 					$scope.downloadError = 'Invalid Download';
 					$scope.downloadErrorDescription = 'The download link you are using is invalid.';
 				}
