@@ -1,8 +1,10 @@
 var path = require('path');
+var fs = require('fs');
 var webpack = require('webpack');
 var env = process.env.NODE_ENV || 'dev';
 var configPath = path.resolve(__dirname, "config", "config." + env + ".js");
 var config = require(configPath);
+var COPYRIGHT = fs.readFileSync(path.resolve(__dirname, "COPYRIGHT")).toString();
 
 module.exports = {
     context: __dirname + "/app",
@@ -34,6 +36,8 @@ module.exports = {
             mangle: {
                 except: ['$', 'jQuery', 'exports', 'require']
             }
-        })
+        }),
+        new webpack.BannerPlugin(COPYRIGHT)
+
     ]
 };
