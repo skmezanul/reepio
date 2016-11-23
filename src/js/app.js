@@ -60,7 +60,6 @@ require('./static/slidingFileDirective.js');
 require('./title/title.js');
 
 var use = [
-	'config',
 	'ngAnimate',
 	'ngRoute',
 	'upload',
@@ -76,7 +75,12 @@ angular.module('peertome', use, ['$compileProvider', function ($compileProvider)
 	$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|filesystem|blob):/);
 	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|filesystem|blob):|data:image\//);
 }])
-	.constant('appEnv', (typeof window['app_env'] !== 'undefined' ? window['app_env'] : 'prod'))
+	// generated while bundling
+	.constant('appEnv', APP_ENV)
+
+	// generated while bundling
+	.constant('config', APP_CONFIG)
+
 	.config(['$routeProvider', '$locationProvider', '$analyticsProvider', 'appEnv', function ($routeProvider, $locationProvider, $analyticsProvider, appEnv) {
 		$routeProvider
 			.otherwise({
@@ -92,11 +96,6 @@ angular.module('peertome', use, ['$compileProvider', function ($compileProvider)
 	.run(['$rootScope', '$location', '$route', '$document', 'appEnv',
 	function ($rootScope, $location, $route, $document, appEnv) {
 		$rootScope.appEnv = appEnv;
-
-		// angular.element(document.getElementById('navbar-collapse-1'))
-		// 	.collapse({
-		// 		toggle: false
-		// 	});
 
 		// init heise social share privacy plugin.
 		var el = document.getElementById('socialshareprivacy');
@@ -131,10 +130,6 @@ angular.module('peertome', use, ['$compileProvider', function ($compileProvider)
 				'perma_orientation' : 'top'
 			});
 		}
-
-		$rootScope.view_Load = function() {
-			// angular.element('#navbar-collapse-1').collapse('hide');
-		};
 
 		$rootScope.getIsPageActive = function (page) {
 			if(page === '/d')

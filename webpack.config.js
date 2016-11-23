@@ -1,4 +1,8 @@
+var path = require('path');
 var webpack = require('webpack');
+var env = process.env.NODE_ENV || 'dev';
+var configPath = path.resolve(__dirname, "config", "config." + env + ".js");
+var config = require(configPath);
 
 module.exports = {
     context: __dirname + "/app",
@@ -20,6 +24,16 @@ module.exports = {
             jQuery: "jquery",
             Peer: "peerjs/lib/peer",
             util: "peerjs/lib/util"
+        }),
+        new webpack.DefinePlugin({
+            APP_ENV: env,
+            APP_CONFIG: JSON.stringify(config)
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            mangle: {
+                except: ['$', 'jQuery', 'exports', 'require']
+            }
         })
     ]
 };
