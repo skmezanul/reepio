@@ -1,6 +1,7 @@
 /**
  * Created by andre (http://korve.github.io/) on 06.12.2014
  */
+const swfobject = require( "swfobject" );
 
 angular.module('reepioClipboardDirective', [])
 	.value('clipboardSwf', 'CopyToClipboard.swf')
@@ -67,13 +68,9 @@ angular.module('reepioClipboardDirective', [])
 
 				var flashObj, bgColor, flashvars, attributes;
 
-				bgColor = element
-					.find('.btn-clipboard')
-					.css('background-color');
-
 				flashvars = {
 					data: scope.data,
-					bgcolor: '0x' + converterService.rgb2hex(bgColor),
+					// bgcolor: '0x' + converterService.rgb2hex(bgColor),
 					id: scope.id
 				};
 

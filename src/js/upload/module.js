@@ -22,5 +22,5 @@
  (function() {
     'use strict';
 
-    angular.module('upload', ['fileIcon', 'progressBar', 'ui.bootstrap', 'common', 'peering', 'reepioClipboard']);
+    angular.module('upload', ['fileIcon', 'progressBar', 'common', 'peering', 'reepioClipboard', 'ui.bootstrap']);
 })();

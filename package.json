@@ -3,16 +3,27 @@
   "version": "1.2.1",
   "description": "The official reep.io source code",
   "dependencies": {
-    "peer": "^0.2.0"
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-ui-bootstrap": "^2.2.0",
+    "angulartics": "^1.3.0",
+    "angulartics-piwik": "^1.0.4",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "pastejs": "^1.0.6",
+    "peer": "^0.2.0",
+    "peerjs": "^0.3.14",
+    "swfobject": "^2.2.1"
   },
   "scripts": {
     "build-html": "rsync -r src/html/ public/html && rsync src/html/*.html public/",
-    "build-js": "rsync -r src/js/ public/js",
+    "build-js": "webpack",
     "build-media": "rsync -r src/media/ public/media",
     "build-less": "lessc --include-path=public/ src/less/theme.less public/css/theme.css",
     "build": "parallelshell 'npm run build-html' 'npm run build-media' 'npm run build-js' 'npm run build-less'",
     "watch-html": "watch 'npm run build-html' 'src/html'",
-    "watch-js": "watch 'npm run build-js' 'src/js'",
+    "watch-js": "webpack -w",
     "watch-media": "watch 'npm run build-media' 'src/media'",
     "watch-less": "watch 'npm run build-less' 'src/less'",
     "watch": "parallelshell 'npm run watch-html' 'npm run watch-js' 'npm run watch-media' 'npm run watch-less'",
@@ -33,7 +44,8 @@
     "karma-jasmine": "^0.3.6",
     "less": "^2.5.3",
     "parallelshell": "^2.0.0",
-    "watch": "^0.16.0"
+    "watch": "^0.16.0",
+    "webpack": "^1.13.3"
   },
   "subdomain": "kodekraftwerk-reepio",
   "engines": {

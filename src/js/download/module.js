@@ -22,5 +22,5 @@
 (function() {
     'use strict';
 
-    angular.module('download', ['ngRoute', 'stringFilters', 'fileIcon', 'progressBar', 'ui.bootstrap', 'common']);
+    angular.module('download', ['ngRoute', 'stringFilters', 'fileIcon', 'progressBar', 'common']);
 })();

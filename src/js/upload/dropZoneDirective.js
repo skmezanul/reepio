@@ -86,7 +86,7 @@
 						e.stopPropagation();
 						e.preventDefault();
 						
-						$animate.removeClass(el, 'ng-hide');
+						$animate.removeClass($el, 'ng-hide');
 					});
 
 					$document.bind('dragleave', function (e) {
@@ -94,13 +94,13 @@
 						e.preventDefault();
 						
                         if(scope.files.length > 0)
-						    $animate.addClass(el, 'ng-hide');
+						    $animate.addClass($el, 'ng-hide');
 					});
 
 					$el.after('<input type="file" style="display: none" multiple>');
 
 					$el.next().on('change', function () {
-                        checkIfFolder(scope, this.files);
+                        checkIfFolder(scope, this.files, $el);
 					});
 
 					$el.on('click', function () {
@@ -110,11 +110,11 @@
 					return $document.bind('drop', function (e) {
 						e.stopPropagation();
 						e.preventDefault();
-						
-					    $animate.addClass(el, 'ng-hide');
+
+					    $animate.addClass($el, 'ng-hide');
 						
 						var files = e.originalEvent.dataTransfer.files || [];
-                        checkIfFolder(scope, files, el);
+                        checkIfFolder(scope, files, $el);
 
 						e.preventDefault();
 						return false;
