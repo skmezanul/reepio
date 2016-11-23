@@ -28,7 +28,7 @@ module.exports = {
             util: "peerjs/lib/util"
         }),
         new webpack.DefinePlugin({
-            APP_ENV: env,
+            APP_ENV: JSON.stringify(env),
             APP_CONFIG: JSON.stringify(config)
         }),
         new webpack.optimize.DedupePlugin(),
