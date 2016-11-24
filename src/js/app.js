@@ -66,6 +66,7 @@ angular.module('peertome', use, ['$compileProvider', function ($compileProvider)
 				controller: 'StaticCtrl'
 			});
 
+		$locationProvider.html5Mode(true);
 		$analyticsProvider.virtualPageviews(false);
 	}])
 	.value('clipboardSwf', '/bower_components/reepio-paste-to-clipboard/bin/CopyToClipboard.swf')

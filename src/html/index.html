@@ -62,7 +62,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" data-ng-href="#/">
+                        <a class="navbar-brand" data-ng-href="/">
                             reep<span class="text-primary">.io</span>
                         </a>
                     </div>
@@ -70,15 +70,15 @@
                     <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
                         <ul class="nav navbar-nav">
                             <li data-ng-class="{active: getIsPageActive('/')}">
-                                <a data-ng-href="#/">Upload<span data-ng-show="fileModel.files.length > 0">
+                                <a data-ng-href="/">Upload<span data-ng-show="fileModel.files.length > 0">
                                 (<span data-ng-bind="fileModel.files.length"></span>)
                             </span></a>
                             </li>
                             <li data-ng-class="{active: getIsPageActive('/about')}">
-                                <a data-ng-href="#/about">About</a>
+                                <a data-ng-href="/about">About</a>
                             </li>
-                            <li class="visible-xs"><a data-ng-href="#/imprint">Imprint</a></li>
-                            <li class="visible-xs"><a data-ng-href="#/privacy">Privacy</a></li>
+                            <li class="visible-xs"><a data-ng-href="/imprint">Imprint</a></li>
+                            <li class="visible-xs"><a data-ng-href="/privacy">Privacy</a></li>
                             <li>
                                 <a href="https://twitter.com/IoReep" target="_blank">
                                     @IoReep
@@ -104,7 +104,7 @@
 
                         <div class="navbar-right col-sm-3"
                              data-ng-hide="getIsPageActive('/d') || ! downloadId || downloadError">
-                            <a data-ng-href="#/d/{{ downloadId }}">
+                            <a data-ng-href="/d/{{ downloadId }}">
                                 <div class="well well-sm">
                                     <span data-ng-bind="downloadService.file.name|maxLength:15"></span>
 
@@ -124,8 +124,8 @@
                 <div class="container">
                     <ul class="nav navbar-nav">
                         <li><p class="navbar-text">&copy; <a data-ng-href="http://reep.io/">reep.io</a> 2016</p></li>
-                        <li><a data-ng-href="#/imprint">Imprint</a></li>
-                        <li><a data-ng-href="#/privacy">Privacy</a></li>
+                        <li><a data-ng-href="/imprint">Imprint</a></li>
+                        <li><a data-ng-href="/privacy">Privacy</a></li>
                     </ul>
                 </div>
             </nav>
