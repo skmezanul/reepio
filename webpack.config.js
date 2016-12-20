@@ -17,7 +17,7 @@ var plugins = [
         APP_ENV: JSON.stringify(env),
         APP_CONFIG: JSON.stringify(config),
         'process.env': {
-            'NODE_ENV': JSON.stringify('production')
+            'NODE_ENV': JSON.stringify(env)
         }
     })
 ];
@@ -45,6 +45,18 @@ module.exports = {
         alias: {
             jquery: "jquery/src/jquery"
         }
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /(node_modules|bower_components)/,
+                query: {
+                    presets: ['es2015']
+                }
+            }
+        ]
     },
     debug: env === 'dev',
     devtool: env === 'dev' ? "eval" : "cheap-module-source-map",
