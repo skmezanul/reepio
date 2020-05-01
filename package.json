@@ -14,7 +14,8 @@
     "pastejs": "^1.0.6",
     "peer": "^0.2.0",
     "peerjs": "^0.3.14",
-    "swfobject": "^2.2.1"
+    "swfobject": "^2.2.1",
+    "snyk": "^1.316.1"
   },
   "scripts": {
     "build-html": "rsync -r src/html/ public/html && rsync src/html/*.html public/",
@@ -29,7 +30,9 @@
     "watch": "parallelshell 'npm run watch-html' 'npm run watch-js' 'npm run watch-media' 'npm run watch-less'",
     "start": "parallelshell 'http-server public -a 0.0.0.0 -p 9001 -c-1' 'npm run watch'",
     "test": "karma start",
-    "postinstall": "bower install --config.interactive=false"
+    "postinstall": "bower install --config.interactive=false",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "https://github.com/kodekraftwerk",
   "license": "GPL-2.0",
@@ -53,5 +56,6 @@
   "subdomain": "kodekraftwerk-reepio",
   "engines": {
     "node": "0.12.x"
-  }
+  },
+  "snyk": true
 }
