@@ -12,7 +12,7 @@
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
     "pastejs": "^1.0.6",
-    "peer": "^0.2.0",
+    "peer": "^0.5.0",
     "peerjs": "^0.3.14",
     "swfobject": "^2.2.1"
   },
